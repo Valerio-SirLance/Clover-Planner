@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clover Planner - Small Wins</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
+</head>
+<body>
+  <header>
+    <h1><a href="../home/home.html">Clover Planner</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
+        <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
+        <li><a href="../small_wins/small-wins.html">Small Wins</a></li>
+        <li><a href="../goals/goals.html">Goals</a></li>
+        <li><button id="toggleTheme">Toggle Theme</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Small Wins</h2>
+    <div id="winsContainer"></div>
+    <button type="button" onclick="import('./script.js').
+        then(module => module.openWinModal())">
+            Add Milestone
+    </button>
+    <div id="winModal" class="modal">
+      <div class="modal-content">
+        <input type="text" id="winTitleInput" placeholder="Win Title">
+        <textarea id="winDescriptionInput" placeholder="Win Description"></textarea>
+        <input type="date" id="winDateInput">
+        <button type="button" onclick="import('./script.js').
+            then(module => module.saveWin())">
+                Save
+        </button>
+        <button type="button" onclick="import('./script.js').
+            then(module => module.closeWinModal())">
+                Cancel
+        </button>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

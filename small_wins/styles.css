@@ -1,0 +1,97 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #99EE99;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+  color: #333;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+main {
+  padding: 20px;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.option {
+  width: 200px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #C7F6B6;
+  border-radius: 10px;
+}
+
+.option img {
+  width: 50px;
+  height: 50px;
+}
+
+.option h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.option p {
+  font-size: 14px;
+}
+
+.note {
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  min-height: 100px;
+  margin: 10px;
+  padding: 10px;
+  background-color: #E2FAB5;
+  border-radius: 10px;
+  cursor: move;
+}
+
+.note h3 {
+  margin-top: 0;
+}
+
+.note .date {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.note .buttons {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.note .buttons button {
+  margin-left: 5px;
+}
+
+#winModal {
+  display: none;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clover Planner - Tasks to Do</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+</head>
+<body>
+  <header>
+    <h1><a href="../home/home.html">Clover Planner</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
+        <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
+        <li><a href="../small_wins/small-wins.html">Small Wins</a></li>
+        <li><a href="../goals/goals.html">Goals</a></li>
+        <li><button id="toggleTheme">Toggle Theme</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Wanna be Productive?</h2>
+    <button type="button" onclick="import('./script.js').
+        then(module => module.openTaskModal())">
+          Add Task
+    </button>
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+          <input type="text" id="taskTitleInput" placeholder="Task Title">
+          <textarea id="taskDescriptionInput" placeholder="Task Description"></textarea>
+          <button type="button" onclick="import('./script.js').
+              then(module => module.addTask())">
+                  Add Task
+          </button>
+          <button type="button" onclick="import('./script.js').
+              then(module => module.closeTaskModal())">
+                  Cancel
+          </button>
+        </div>
+      </div>
+    <div id="tasksContainer">
+      <div id="notStartedTasks" class="task-column">
+        <h3>Not Started</h3>
+        <!-- Tasks to do -->
+        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      </div>
+      <div id="inProgressTasks" class="task-column">
+        <h3>In Progress</h3>
+        <!-- Tasks in progress -->
+        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      </div>
+      <div id="doneTasks" class="task-column">
+        <h3>Done</h3>
+        <!-- Completed tasks -->
+        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      </div>
+    </div>
+    </div>
+  </main>
+  <script type="module" src="script.js"></script>
+</body>
+</html>

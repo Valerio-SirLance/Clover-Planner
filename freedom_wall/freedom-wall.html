@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clover Planner - Freedom Wall</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
+</head>
+<body>
+  <header>
+     <h1><a href="../home/home.html">Clover Planner</a></h1>
+    <nav>
+      <ul>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
+        <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
+        <li><a href="../small_wins/small-wins.html">Small Wins</a></li>
+        <li><a href="../goals/goals.html">Goals</a></li>
+        <li><button id="toggleTheme">Toggle Theme</button></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>What's on your Mind?</h2>
+    <div id="notesContainer"></div>
+    <button type="button" onclick="import('./script.js').
+        then(module => module.openNoteModal())">
+          Add Note
+      </button>
+    <div id="noteModal" class="modal">
+      <div class="modal-content">
+        <input type="text" id="noteTitleInput" placeholder="Note Title">
+        <textarea id="noteContentInput" placeholder="Your note here..."></textarea>
+        <button type="button" onclick="import('./script.js').
+          then(module => module.saveNote())">
+            Save
+        </button>
+        <button type="button" onclick="import('./script.js').
+          then(module => module.closeNoteModal())">
+            Cancel
+        </button>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
