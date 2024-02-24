@@ -3,20 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clover Planner</title>
+  <title>Clover Planner - Log In</title>
+  <link rel="icon" href="./assets/images/logo.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
 </head>
-<body>
-  <div id="passwordModal" class="modal">
-    <div class="modal-content">
-      <input type="password" id="passwordInput" placeholder="Enter password">
-      <button type="button" onclick="import('./script.js').
-        then(module => module.checkPassword())">
-          Submit
-      </button>
-    </div>
+<body class="bg-gray-100 flex justify-center items-center h-screen">
+  <div class="login-container">
+    <h2 class="login-title">Welcome to</h2>
+    <h1 class="app-title">Clover Planner</h1>
+    <p class="login-text">Empowering Productivity!</p>
+    <form id="loginForm" class="login-form">
+      <input type="password" id="passwordInput" placeholder="Enter Password" class="login-input">
+      <button type="button" onclick="import('./script.js').then(module => module.checkPassword())" class="login-button">Submit</button>
+    </form>
+    <div id="passwordModal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <div class="modal-message" id="modalMessage"></div>
+        <div class="modal-button-container">
+          <button id="modalCloseBtn" class="modal-close">Okay</button>
+        </div>
+      </div>
+    </div>    
   </div>
   <script type="module" src="script.js"></script>
 </body>
