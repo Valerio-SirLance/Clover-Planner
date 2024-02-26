@@ -9,6 +9,10 @@ body {
 
 /* CSS of Navigation Area */
 
+.mobile-header {
+  display: none !important;
+}
+
 /* Light Mode */
 [data-theme='light'] .bg-green-500 {
   background-color: #45aa48;
@@ -292,6 +296,10 @@ h2:hover {
     top: 2px;
     left: 2px; 
   }
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
   /* End of CSS of Navigation Area */
   
   .options {
@@ -317,4 +325,167 @@ h2:hover {
   .option p {
     font-size: 1rem; 
   }
+}
+
+/* Mobile Responsive Styles */
+@media only screen and (max-width: 767px) {
+  
+  /* CSS of Navigation Area */
+  header:not(.mobile-header) {
+    display: none;
+  }
+  
+  .mobile-header {
+    display: block !important;
+  }
+
+  .mobile-header img {
+    height: 35px;
+    padding-left: 10px;
+  }
+
+  .mobile-header .header-content {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mobile-header .left-section {
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  .mobile-header .left-section h1 {
+    font-size: 1.5rem;
+    margin-left: 10px;
+  }
+  
+  .mobile-header .right-section .menu-toggle {
+    padding-right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }  
+
+  .mobile-header {
+    display: none;
+  }
+
+  [data-theme='dark'] .mobile-nav {
+    background-color: #1c681e;
+  }
+
+  .mobile-nav {
+    border-top: 3px solid #fff !important; 
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: #45aa48;
+    border-top: none;
+    border-radius: 0 0 0 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0.5, 0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .mobile-nav.show-nav {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0s linear 0s;
+  }
+
+  .mobile-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    flex-direction: column;
+  }
+
+  .mobile-nav ul li {
+    border-bottom: 3px solid #fff; 
+    margin: 0;
+  }
+
+  .mobile-nav ul li:last-child {
+    border-bottom: none; 
+  }
+
+  .mobile-nav ul li a {
+    display: block;
+    font-size: 0.8rem; 
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #fff; 
+  }
+
+  .mobile-nav ul li a:hover {
+    background-color: #ccc;
+  }
+
+  nav ul li.active a::after {
+    bottom: 3px; 
+    height: 2px; 
+  }
+
+  .switch {
+    width: 60px; 
+    height: 24px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .slider {
+    width: 40px; 
+    height: 24px;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    font-size: 12px; 
+    top: 2px;
+    left: 2px; 
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
+  /* End of CSS of Navigation Area */
+
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 2rem; 
+  }
+
+  .options {
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+    margin: 2rem 0 0 0;
+  }
+
+  .option {
+    width: calc(50% - 2rem); 
+    margin: 0.5rem;
+    padding: 15px;
+  }
+
+  .option img {
+    width: 40px; 
+    height: 40px;
+    margin: 0;
+  }
+
+  .option h3 {
+    font-size: 0.8rem; 
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .option p {
+    font-size: 0.5rem; 
+    margin: 0;
+  }
+
+
 }
