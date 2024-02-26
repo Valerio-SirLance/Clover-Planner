@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clover Planner - Home</title>
   <link rel="icon" href="../assets/images/logo.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-  <header>
+<body class="bg-gray-100">
+  <header class="bg-green-500 text-white">
     <div class="header-content">
+      <img src="../assets/images/logo.png" alt="Clover Planner">
       <h1>Clover Planner</h1>
       <label class="switch">
         <input type="checkbox" id="toggleTheme">
@@ -18,7 +21,7 @@
     </div>
     <nav>
       <ul>
-        <li><a href="../home/home.html">Home</a></li>
+        <li class="active"><a href="../home/home.html">Home</a></li>
         <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
         <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
         <li><a href="../small_wins/small-wins.html">Small Wins</a></li>
@@ -27,30 +30,30 @@
       </ul>
     </nav>
   </header>
-  <main>
-    <section id="home">
+  <main class="flex justify-center items-center h-screen">
+    <section id="home" class="text-center">
       <h2>Welcome, Lance! How's your day?</h2>
-      <div class="options">
-        <a href="../freedom_wall/freedom-wall.html"><div class="option">
-          <img src="freedom-wall-icon.png" alt="Freedom Wall Icon">
-          <h3>Freedom Wall</h3>
-          <p>Express yourself freely</p>
-        </div></a>
-        <a href="../tasks_to_do/task-to-do.html"><div class="option">
-          <img src="tasks-icon.png" alt="Tasks to Do Icon">
-          <h3>Tasks to Do</h3>
-          <p>Stay productive</p>
-        </div></a>
-        <a href="../small_wins/small-wins.html"><div class="option">
-          <img src="small-wins-icon.png" alt="Small Wins Icon">
-          <h3>Small Wins</h3>
-          <p>Celebrate your achievements</p>
-        </div></a>
-        <a href="../goals/goals.html"><div class="option">
-          <img src="goals-icon.png" alt="Goals Icon">
-          <h3>Goals</h3>
-          <p>Stay motivated</p>
-        </div></a>
+      <div class="options mt-10 flex flex-wrap justify-center">
+        <a href="../freedom_wall/freedom-wall.html" class="option">
+          <img src="../assets/images/freedom-wall-icon.png" alt="Freedom Wall Icon">
+          <h3 class="text-xl font-semibold text-gray-800">Freedom Wall</h3>
+          <p class="text-gray-600">Express yourself freely</p>
+        </a>
+        <a href="../tasks_to_do/task-to-do.html" class="option">
+          <img src="../assets/images/tasks-icon.png" alt="Tasks to Do Icon">
+          <h3 class="text-xl font-semibold text-gray-800">Tasks to Do</h3>
+          <p class="text-gray-600">Stay productive</p>
+        </a>
+        <a href="../small_wins/small-wins.html" class="option">
+          <img src="../assets/images/small-wins-icon.png" alt="Small Wins Icon">
+          <h3 class="text-xl font-semibold text-gray-800">Small Wins</h3>
+          <p class="text-gray-600">Celebrate your achievements</p>
+        </a>
+        <a href="../goals/goals.html" class="option">
+          <img src="../assets/images/goals-icon.png" alt="Goals Icon">
+          <h3 class="text-xl font-semibold text-gray-800">Goals</h3>
+          <p class="text-gray-600">Stay motivated</p>
+        </a>
       </div>
     </section>
   </main>
