@@ -55,6 +55,11 @@ body {
   width: auto;
   height: 50px;
   padding-left: 30px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.header-content img:hover {
+  transform: translateY(-5px);
 }
 
 h1 {
