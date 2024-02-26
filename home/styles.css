@@ -255,3 +255,66 @@ h2:hover {
   text-align: center;
   margin-bottom: 1rem;
 }
+
+/* Tablet Responsive Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* CSS of Navigation Area */
+  .header-content img {
+    height: 40px;
+  }
+
+  h1 {
+    font-size: 1rem; 
+  }
+
+  nav ul li {
+    margin-right: 20px; 
+  }
+
+  nav ul li a {
+    font-size: 0.8rem; 
+  }
+
+  .switch {
+    width: 60px; 
+    height: 24px;
+  }
+
+  .slider {
+    width: 40px; 
+    height: 24px;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    font-size: 12px; 
+    top: 2px;
+    left: 2px; 
+  }
+  /* End of CSS of Navigation Area */
+  
+  .options {
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+    margin: 3rem 0 0 0;
+  }
+
+  .option {
+    width: calc(50% - 2rem); 
+    margin: 0.5rem;
+  }
+
+  .option img {
+    width: 80px; 
+    height: 80px;
+  }
+
+  .option h3 {
+    font-size: 1.2rem; 
+  }
+
+  .option p {
+    font-size: 1rem; 
+  }
+}
