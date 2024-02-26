@@ -22,7 +22,7 @@ export function checkPassword() {
     const correctPassword = "Clover0320";
     // Password correct, proceed to home page
     if (passwordInput === correctPassword) {
-        showModal("Welcome, Lance!");
+        showModal("Welcome, Sir Lance!");
     } else {
         // Password incorrect, show error message
         showModal("Password Incorrect, Try Again!");
@@ -41,7 +41,9 @@ function showModal(message) {
     modalOverlay.style.zIndex = 1;
     modalCloseBtn.style.zIndex = 1;
 
-    if (message === "Welcome, Lance!") {
+    document.body.classList.add('modal-open');
+
+    if (message === "Welcome, Sir Lance!") {
         modalCloseBtn.addEventListener('click', function() {
             window.location.href = "./home/home.html"; 
         });
@@ -54,6 +56,8 @@ function closeModal() {
     const modalOverlay = document.querySelector('.modal-overlay');
     modal.style.display = 'none';
     modalOverlay.style.zIndex = -1;
+
+    document.body.classList.remove('modal-open');
 }
 
 // Attach event listener to modal close button

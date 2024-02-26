@@ -16,11 +16,15 @@ body {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-/*
+
 .login-container:hover {
     transform: scale(1.05); 
 }
-*/
+
+.modal-open .login-container:hover {
+  transform: none; 
+}
+
 .login-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -93,7 +97,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeIn 0.3s ease forwards;
+  animation: fadeIn 2s ease forwards;
 }
 
 @keyframes fadeIn {
@@ -113,7 +117,7 @@ body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9998;
-  animation: fadeInOverlay 0.3s ease forwards;
+  animation: fadeInOverlay 2s ease forwards;
 }
 
 @keyframes fadeInOverlay {
@@ -134,7 +138,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: slideIn 0.3s ease forwards;
+  animation: slideIn 1s ease forwards;
 }
 
 @keyframes slideIn {
@@ -174,3 +178,59 @@ body {
 }
 
 /* End of CSS of Modals */
+
+/* Mobile Responsive */
+@media only screen and (max-width: 768px) {
+  .login-container {
+    width: 50%;
+    padding: 1rem;
+  }
+
+  .app-title {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  body {
+    background-image: url('./assets/images/mobile_bg.png');
+  }
+
+  .login-container {
+    width: 80%;
+    padding: 1rem;
+  }
+
+  .login-input,
+  .login-button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .login-title {
+    font-size: 1.2rem;
+  }
+
+  .app-title {
+    font-size: 1.8rem;
+  }
+
+  /* CSS of Modals */
+  .modal {
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    padding: 1.5rem;
+  }
+
+  #modalMessage {
+    font-size: 1.2rem;
+  }
+
+  /* End of CSS of Modals */
+}
