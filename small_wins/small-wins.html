@@ -1,28 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clover Planner</title>
   <link rel="icon" href="../assets/images/logo.png" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
   <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
 </head>
-<body>
-  <header>
-    <h1><a href="../home/home.html">Clover Planner</a></h1>
+
+<body class="bg-gray-100">
+  <header class="bg-green-500 text-white">
+    <div class="header-content">
+      <a href="../home/home.html"><img src="../assets/images/logo.png" alt="Clover Planner"></a>
+      <h1><a href="../home/home.html">Clover Planner</a></h1>
+      <label class="switch">
+        <input type="checkbox" id="toggleTheme">
+        <span class="slider round"></span>
+      </label>
+    </div>
     <nav>
       <ul>
         <li><a href="../home/home.html">Home</a></li>
         <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
         <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
-        <li><a href="../small_wins/small-wins.html">Small Wins</a></li>
+        <li class="active"><a href="../small_wins/small-wins.html">Small Wins</a></li>
         <li><a href="../goals/goals.html">Goals</a></li>
-        <li><button id="toggleTheme">Toggle Theme</button></li>
+        <li><a href="../index.html">Log Out</a></li>
       </ul>
     </nav>
   </header>
+
+  <header class="mobile-header bg-green-500 text-white">
+    <div class="header-content">
+      <div class="left-section">
+        <a href="../home/home.html"><img src="../assets/images/logo.png" alt="Clover Planner"></a>
+        <h1><a href="../home/home.html">Clover Planner</a></h1>
+      </div>
+      <div class="right-section">
+        <div class="menu-toggle" onclick="import('./script.js').
+        then(module => module.toggleMenu())">&#9776;</div>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <ul>
+        <label class="switch">
+          <input type="checkbox" id="toggleThemeMobile">
+          <span class="slider round"></span>
+        </label>
+        <li><a href="../home/home.html">Home</a></li>
+        <li><a href="../freedom_wall/freedom-wall.html">Freedom Wall</a></li>
+        <li><a href="../tasks_to_do/task-to-do.html">Tasks to Do</a></li>
+        <li class="active"><a href="../small_wins/small-wins.html">Small Wins</a></li>
+        <li><a href="../goals/goals.html">Goals</a></li>
+        <li><a href="../index.html">Log Out</a></li>
+      </ul>
+    </nav>
+  </header>  
+
   <main>
     <h2>Small Wins</h2>
     <div id="winsContainer"></div>
