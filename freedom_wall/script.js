@@ -45,7 +45,7 @@ export function saveNote() {
         }).then(() => {
             alert('Note Successfully Added!');
             closeNoteModal();
-            location.reload(); // Reload the page
+            location.reload();
         }).catch(error => {
             console.error('Error adding note: ', error);
         });
@@ -65,21 +65,26 @@ function displayNotes() {
             snapshot.forEach(childSnapshot => {
                 const note = childSnapshot.val();
                 const noteElement = document.createElement('div');
+                noteElement.classList.add('note'); 
                 noteElement.innerHTML = `
+                    <div class="note-header">
+                        <div class="note-datetime">${new Date(note.timestamp).toLocaleString()}</div>
+                        <div class="note-actions">
+                            <button type="button" onclick="import('./script.js').then(module => module.editNote('${childSnapshot.key}', '${note.title}', '${note.content}'))">
+                                <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                            </button>
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteNote('${childSnapshot.key}'))">
+                                <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+                            </button>
+                        </div>
+                    </div>
                     <h3>${note.title}</h3>
                     <p>${note.content}</p>
-                    <p>${new Date(note.timestamp).toLocaleString()}</p>
-                    <button type="button" onclick="import('./script.js').then(module => module.editNote('${childSnapshot.key}', '${note.title}', '${note.content}'))">
-                        Edit
-                    </button>
-                    <button type="button" onclick="import('./script.js').then(module => module.deleteNote('${childSnapshot.key}'))">
-                        Delete
-                    </button>
                 `;
                 notesContainer.appendChild(noteElement);
             });
         } else {
-            notesContainer.innerHTML = '<p>No Notes Yet. Create One!</p>';
+            notesContainer.innerHTML = '<p class="empty">No Notes Yet. Create One!</p>';
         }
     }).catch(error => {
         console.error('Error fetching notes:', error);
@@ -98,7 +103,7 @@ export function editNote(noteKey, currentTitle, currentContent) {
             content: newContent
         }).then(() => {
             alert('Note Successfully Updated!');
-            location.reload(); // Reload the page
+            location.reload(); 
         }).catch(error => {
             console.error('Error updating note: ', error);
         });
@@ -112,7 +117,7 @@ export function deleteNote(noteKey) {
       const noteRef = ref(database, 'freedomWall/' + noteKey);
       remove(noteRef).then(() => {
           alert('Note Successfully Deleted!');
-          location.reload(); // Reload the page
+          location.reload(); 
       }).catch(error => {
           console.error('Error deleting note: ', error);
       });
