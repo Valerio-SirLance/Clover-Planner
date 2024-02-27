@@ -53,6 +53,7 @@ export function addTask() {
     alert('Please Enter Task Title and Description.');
   }
 }
+
 // Function to display tasks
 function displayTasks() {
   const notStartedTasks = document.getElementById('notStartedTasks');
@@ -85,13 +86,13 @@ function displayTasks() {
 
         if (task.status === 'notStarted') {
           notStartedTasks.appendChild(taskElement);
-          notStartedTasks.querySelector('p').style.display = 'none'; // Hide "No Tasks Here"
+          notStartedTasks.querySelector('p').style.display = 'none'; 
         } else if (task.status === 'inProgress') {
           inProgressTasks.appendChild(taskElement);
-          inProgressTasks.querySelector('p').style.display = 'none'; // Hide "No Tasks Here"
+          inProgressTasks.querySelector('p').style.display = 'none'; 
         } else if (task.status === 'done') {
           doneTasks.appendChild(taskElement);
-          doneTasks.querySelector('p').style.display = 'none'; // Hide "No Tasks Here"
+          doneTasks.querySelector('p').style.display = 'none'; 
         }
       });
     } else {
@@ -105,14 +106,13 @@ function displayTasks() {
   });
 }
 
-
 // Function to move task to different status
 export function moveTask(taskKey, newStatus) {
   const taskRef = ref(database, `tasks/${taskKey}`);
   update(taskRef, { status: newStatus })
     .then(() => {
       console.log('Task status updated successfully!');
-      location.reload(); // Reload the page
+      location.reload(); 
     })
     .catch((error) => {
       console.error('Error updating task status:', error);
@@ -131,7 +131,7 @@ export function editTask(taskKey, currentTitle, currentDescription) {
       description: newDescription
     }).then(() => {
       alert('Task Successfully Updated!');
-      location.reload(); // Reload the page
+      location.reload(); 
     }).catch(error => {
       console.error('Error updating task: ', error);
     });
@@ -146,7 +146,7 @@ export function deleteTask(taskKey) {
     remove(taskRef)
       .then(() => {
         alert('Task Successfully Deleted!');
-        location.reload(); // Reload the page
+        location.reload();
       })
       .catch(error => {
         console.error('Error deleting task: ', error);
@@ -158,3 +158,46 @@ export function deleteTask(taskKey) {
 window.onload = function() {
   displayTasks();
 };
+
+// Light / Dark Modes + Mobile Navigation Menu
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleSwitch = document.querySelector('#toggleTheme');
+  const toggleSwitchMobile = document.querySelector('#toggleThemeMobile');
+  const mobileNav = document.getElementById('mobileNav'); 
+  const menuToggle = document.querySelector('.menu-toggle'); 
+
+  toggleSwitch.addEventListener('change', switchTheme);
+  toggleSwitchMobile.addEventListener('change', switchTheme);
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  // Function to close menu when clicking outside
+  window.addEventListener('click', function(e) {
+      if (!mobileNav.contains(e.target) && e.target !== menuToggle) {
+          mobileNav.classList.remove('show-nav');
+      }
+  });
+
+  function switchTheme(e) {
+      if (e.target.checked) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+      } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          localStorage.setItem('theme', 'light');
+      }
+  }
+
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', currentTheme);
+  if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
+      toggleSwitchMobile.checked = true;
+  }
+
+  // Toggle menu function
+  function toggleMenu() {
+      mobileNav.classList.toggle('show-nav');
+  }
+});
+

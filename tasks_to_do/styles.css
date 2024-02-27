@@ -1,65 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+}
+
+/* CSS of Navigation Area */
+
+.mobile-header {
+  display: none !important;
+}
+
+/* Light Mode */
+[data-theme='light'] .bg-green-500 {
+  background-color: #45aa48;
+}
+
+[data-theme='light'] body {
+  background-image: url('../assets/images/bg_light.png');
+}
+
+/* Dark Mode */
+[data-theme='dark'] .bg-green-500 {
+  background-color: #1c681e;
+}
+
+[data-theme='dark'] body {
+  background-image: url('../assets/images/bg_dark.png');
+}
+
+[data-theme='dark'] h1 {
+  color: #d5d2d2;
+}
+
+[data-theme='dark'] nav ul li a {
+  color: #d5d2d2;
+}
+
+[data-theme='dark'] nav ul li a:hover {
+  color: #fff;
+}
+
+.bg-green-500 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff; 
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.header-content img {
+  width: auto;
+  height: 50px;
+  padding-left: 30px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.header-content img:hover {
+  transform: translateY(-5px);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1rem;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding-top: 20px;
+  margin-left: 15px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+h1:hover {
+  transform: translateY(-5px);
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 35px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 1.3rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #ccc; 
+}
+
+nav ul li.active a {
+  text-decoration: none;
+  position: relative;
+}
+
+nav ul li.active a::after {
+  content: '';
+  position: absolute;
+  bottom: -14px; 
+  left: 0;
+  width: 100%;
+  height: 6px; 
+  background-color: #8D4D22; 
+}
+
+/* Switch Slider Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #93C0FF;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "🌞"; 
+  font-size: 15px; 
+  background-color:#93C0FF;
+  border: 1px solid gray; 
+  top: 4px;
+  left: 4px;
+  transition: transform 0.4s;
+}
+
+input:checked + .slider:before {
+  content: "🌜";
+  background-color:#232749; 
+  border: 1px solid #ccc; 
+  transform: translateX(26px);
+}
+
+input:checked + .slider {
+  background-color: #232749;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #232749;
+}
+
+.slider.round {
+  left: 20px;
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* End of Switch Slider Styles */
+/* End of CSS of Navigation Area */
+
+h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin-top: 3rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+h2:hover {
+  transform: translateY(-5px);
+}
+
+[data-theme='dark'] h2 {
+  color: #d5d2d2;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal-content input[type=text], .modal-content textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content button {
+  background-color: #45aa48;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.modal-content button:hover {
+  background-color: #379938;
+}
+
+/* Tablet Responsive Styles */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* CSS of Navigation Area */
+  .header-content img {
+    height: 40px;
   }
-  
-  header {
-    background-color: #99EE99;
-    padding: 20px;
-  }
-  
+
   h1 {
-    margin: 0;
-    color: #333;
+    font-size: 1rem; 
   }
-  
-  nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+
   nav ul li {
-    display: inline;
-    margin-right: 20px;
+    margin-right: 20px; 
   }
-  
+
   nav ul li a {
-    text-decoration: none;
-    color: #333;
+    font-size: 0.8rem; 
   }
-  
-  main {
-    padding: 20px;
+
+  .switch {
+    width: 60px; 
+    height: 24px;
   }
-  
-  .options {
-    display: flex;
-    flex-wrap: wrap;
+
+  .slider {
+    width: 40px; 
+    height: 24px;
+    border-radius: 24px;
   }
-  
-  .option {
-    width: 200px;
-    margin: 10px;
-    padding: 20px;
-    background-color: #C7F6B6;
-    border-radius: 10px;
+
+  .slider:before {
+    font-size: 12px; 
+    top: 2px;
+    left: 2px; 
   }
-  
-  .option img {
-    width: 50px;
-    height: 50px;
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
   }
+  /* End of CSS of Navigation Area */
   
-  .option h3 {
-    margin-top: 10px;
-    margin-bottom: 5px;
-  }
-  
-  .option p {
-    font-size: 14px;
-  }
-  
-  #taskModal {
+}
+
+/* Mobile Responsive Styles */
+@media only screen and (max-width: 767px) {
+   
+  /* CSS of Navigation Area */
+  header:not(.mobile-header) {
     display: none;
   }
+  
+  .mobile-header {
+    display: block !important;
+  }
+
+  .mobile-header img {
+    height: 35px;
+    padding-left: 10px;
+  }
+
+  .mobile-header .header-content {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mobile-header .left-section {
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+  }
+  
+  .mobile-header .left-section h1 {
+    font-size: 1.5rem;
+    margin-left: 10px;
+  }
+  
+  .mobile-header .right-section .menu-toggle {
+    padding-right: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }  
+
+  .mobile-header {
+    display: none;
+  }
+
+  [data-theme='dark'] .mobile-nav {
+    background-color: #1c681e;
+  }
+
+  .mobile-nav {
+    border-top: 3px solid #fff !important; 
+    position: absolute;
+    top: 80px;
+    right: 0;
+    background-color: #45aa48;
+    border-top: none;
+    border-radius: 0 0 0 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0.5, 0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  }
+
+  .mobile-nav.show-nav {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0s linear 0s;
+  }
+
+  .mobile-nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; 
+    flex-direction: column;
+  }
+
+  .mobile-nav ul li {
+    border-bottom: 3px solid #fff; 
+    margin: 0;
+  }
+
+  .mobile-nav ul li:last-child {
+    border-bottom: none; 
+  }
+
+  .mobile-nav ul li a {
+    display: block;
+    font-size: 0.8rem; 
+    padding: 10px 10px;
+    text-decoration: none;
+    color: #fff; 
+  }
+
+  .mobile-nav ul li a:hover {
+    background-color: #ccc;
+  }
+
+  nav ul li.active a::after {
+    bottom: 3px; 
+    height: 2px; 
+  }
+
+  .switch {
+    width: 60px; 
+    height: 24px;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .slider {
+    width: 40px; 
+    height: 24px;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    font-size: 12px; 
+    top: 2px;
+    left: 2px; 
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(16px);
+  }
+  /* End of CSS of Navigation Area */
+
+  h2 {
+    font-size: 1.1rem;
+    margin-top: 2rem; 
+  }
+
+}
+
