@@ -123,3 +123,47 @@ export function deleteNote(noteKey) {
 window.onload = function() {
     displayNotes();
   };
+
+// Light / Dark Modes + Mobile Navigation Menu
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleSwitch = document.querySelector('#toggleTheme');
+    const toggleSwitchMobile = document.querySelector('#toggleThemeMobile');
+    const mobileNav = document.getElementById('mobileNav'); 
+    const menuToggle = document.querySelector('.menu-toggle'); 
+
+    toggleSwitch.addEventListener('change', switchTheme);
+    toggleSwitchMobile.addEventListener('change', switchTheme);
+
+    menuToggle.addEventListener('click', toggleMenu);
+
+    // Function to close menu when clicking outside
+    window.addEventListener('click', function(e) {
+        if (!mobileNav.contains(e.target) && e.target !== menuToggle) {
+            mobileNav.classList.remove('show-nav');
+        }
+    });
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+        toggleSwitchMobile.checked = true;
+    }
+
+    // Toggle menu function
+    function toggleMenu() {
+        mobileNav.classList.toggle('show-nav');
+    }
+});
+
+  
