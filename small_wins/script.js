@@ -68,29 +68,34 @@ function displayWins() {
                 const win = childSnapshot.val();
                 const winElement = document.createElement('div');
                 winElement.className = 'win';
+                const winDate = new Date(win.timestamp);
+                const formattedDate = `${winDate.getMonth() + 1}/${winDate.getDate()}/${winDate.getFullYear()}`;
                 winElement.innerHTML = `
+                    <div class="win-header">
+                    <div class="win-datetime">${new Date(win.timestamp).toLocaleString()}</div>
+                        <div class="win-actions">
+                            <button type="button" onclick="import('./script.js').then(module => module.editWin('${childSnapshot.key}', '${win.title}', '${win.description}', '${win.date}'))">
+                                <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                            </button>
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteWin('${childSnapshot.key}'))">
+                                <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+                            </button>
+                        </div>
+                    </div>
                     <h3>${win.title}</h3>
                     <p>${win.description}</p>
-                    <p>Date: ${win.date}</p>
-                    <p>${new Date(win.timestamp).toLocaleString()}</p>
-                    <div class="buttons">
-                        <button type="button" onclick="import('./script.js').then(module => module.editWin('${childSnapshot.key}', '${win.title}', '${win.description}', '${win.date}'))">
-                            Edit
-                        </button>
-                        <button type="button" onclick="import('./script.js').then(module => module.deleteWin('${childSnapshot.key}'))">
-                            Delete
-                        </button>
-                    </div>
+                    <p class="happens">Date Achieved: ${formattedDate}</p>
                 `;
                 winsContainer.appendChild(winElement);
             });
         } else {
-            winsContainer.innerHTML = '<p>No Wins Yet. Celebrate One!</p>';
+            winsContainer.innerHTML = '<p class="empty">No Wins Yet. Celebrate One!</p>';
         }
     }).catch(error => {
         console.error('Error fetching wins:', error);
     });
 }
+
 
 // Function to edit win
 export function editWin(winKey, currentTitle, currentDescription, currentDate) {

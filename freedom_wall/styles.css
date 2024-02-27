@@ -404,7 +404,8 @@ h2:hover {
   }
 
   .note .note-datetime {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
+    margin-right: 1rem;
   }
 }
 
@@ -569,7 +570,7 @@ h2:hover {
   }
 
   .note .note-datetime {
-    font-size: 0.4rem;
+    font-size: 0.35rem;
     margin-right: 1rem;
   }
 
