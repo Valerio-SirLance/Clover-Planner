@@ -68,29 +68,36 @@ function displayGoals() {
                 const goal = childSnapshot.val();
                 const goalElement = document.createElement('div');
                 goalElement.className = 'goal';
+                const goalDate = new Date(goal.dueDate);
+                const formattedDate = `${goalDate.getMonth() + 1}/${goalDate.getDate()}/${goalDate.getFullYear()}`;
                 goalElement.innerHTML = `
+                    <div class="goal-header">
+                    <div class="goal-datetime">${new Date(goal.timestamp).toLocaleString()}</div>
+                        <div class="goal-actions">
+                            <button type="button" onclick="import('./script.js').then(module => module.editGoal('${childSnapshot.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
+                                <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                            </button>
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteGoal('${childSnapshot.key}'))">
+                                <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+                            </button>
+                        </div>
+                    </div>
                     <h3>${goal.title}</h3>
                     <p>${goal.description}</p>
-                    <p>Due Date: ${goal.dueDate}</p>
-                    <p>${new Date(goal.timestamp).toLocaleString()}</p>
-                    <div class="buttons">
-                        <button type="button" onclick="import('./script.js').then(module => module.editGoal('${childSnapshot.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
-                            Edit
-                        </button>
-                        <button type="button" onclick="import('./script.js').then(module => module.deleteGoal('${childSnapshot.key}'))">
-                            Delete
-                        </button>
-                    </div>
+                    <p class="happens">Target Date: ${formattedDate}</p>
                 `;
                 goalsContainer.appendChild(goalElement);
             });
         } else {
-            goalsContainer.innerHTML = '<p>No Goals Yet. Set One!</p>';
+            goalsContainer.innerHTML = '<p class="empty">No Goals Yet. Set One!</p>';
         }
     }).catch(error => {
         console.error('Error fetching goals:', error);
     });
 }
+
+
+
 
 // Function to edit goal
 export function editGoal(goalKey, currentTitle, currentDescription, currentDueDate) {

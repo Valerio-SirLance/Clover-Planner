@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
   <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 
 <body class="bg-gray-100">
@@ -64,8 +65,9 @@
   <main>
     <h2>Got a Motivation to Strive?</h2>
     <div id="goalsContainer"></div>
-    <button type="button" onclick="import('./script.js').then(module => module.openGoalModal())">
-      Add Goal
+    <button type="button" class="addButton" 
+      onclick="import('./script.js').then(module => module.openGoalModal())">
+        Add Goal
     </button>
     <div id="goalModal" class="modal">
       <div class="modal-content">

@@ -203,6 +203,103 @@ h2:hover {
   color: #d5d2d2;
 }
 
+#goalsContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+.goal, .empty {
+  width: calc(21.4% - 20px);
+  max-height: 200px;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 1rem 1rem;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.addButton, .empty {
+  min-height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.goal .goal-header {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+}
+
+.goal .goal-datetime {
+  font-size: 0.8rem;
+  color: #666;
+  margin-right: 5rem;
+}
+
+.goal .goal-actions {
+  display: flex;
+  order: 2;
+}
+
+.goal .goal-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1rem;
+  color: #45aa48;
+}
+
+.addButton {
+  width: 20%; 
+  padding: 1rem;
+  background-color: #45aa48;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 1rem 40%;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .addButton {
+  background-color: #1c681e;
+  color: #ccc;
+}
+
+[data-theme='dark'] .goal, [data-theme='dark'] .empty {
+  background-color: #d5d2d2;
+}
+
+.goal:hover, .addButton:hover, .empty:hover {
+  transform: scale(1.05); 
+}
+
+.goal h3, .empty {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.goal p {
+  font-size: 1.1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -291,6 +388,30 @@ h2:hover {
   }
   /* End of CSS of Navigation Area */
   
+  #goalsContainer {
+    margin-top: 1rem;
+  }
+  
+  .goal, .empty {
+    width: 29%;
+    max-height: 200px;
+  }
+
+  .addButton {
+    font-size: 1.5rem;
+    min-height: 100px;
+    padding: 0.8rem;
+  }
+
+  .goal .goal-datetime {
+    font-size: 0.6rem;
+    margin-right: 1rem;
+  }
+
+  .goal .happens {
+    font-size: 0.8rem;
+  }
+
 }
 
 /* Mobile Responsive Styles */
@@ -422,6 +543,49 @@ h2:hover {
   h2 {
     font-size: 1.1rem;
     margin-top: 2rem; 
+  }
+
+  #goalsContainer {
+    margin-top: 0.8rem;
+  }
+  
+  .goal, .empty {
+    width: 40%;
+    max-height: 200px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+  }
+
+  .addButton {
+    width: 30%;
+    font-size: 0.8rem;
+    min-height: 50px;
+    padding: 0.5rem;
+    margin: 0.5rem 35%;
+  }
+
+  .goal h3, .empty {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .goal p {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .goal .goal-datetime {
+    font-size: 0.35rem;
+    margin-right: 1rem;
+  }
+
+  .goal .goal-actions button {
+    font-size: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .goal .happens {
+    font-size: 0.5rem;
   }
 
 }
