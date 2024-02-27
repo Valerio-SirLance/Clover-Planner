@@ -580,3 +580,34 @@ h2:hover {
   }
 }
 
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1c681e; 
+  border-radius: 5px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1c681e; 
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-track {
+  background: #ccc; 
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: #45aa48;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #45aa48;
+}
+
+/* End of Scrollbar Styles */
