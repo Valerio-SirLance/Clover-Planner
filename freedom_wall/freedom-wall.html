@@ -64,11 +64,13 @@
 
   <main>
     <h2>What's on your Mind?</h2>
-    <div id="notesContainer"></div>
     <button type="button" class="addButton" onclick="import('./script.js').
         then(module => module.openNoteModal())">
           Add Note
-      </button>
+    </button>
+
+    <div id="notesContainer"></div>
+    
     <div id="noteModal" class="modal">
       <div class="modal-content">
         <input type="text" id="noteTitleInput" placeholder="Note Title">

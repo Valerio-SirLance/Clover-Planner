@@ -64,11 +64,13 @@
 
   <main>
     <h2>Anything to Celebrate?</h2>
-    <div id="winsContainer"></div>
     <button type="button" class="addButton" onclick="import('./script.js').
         then(module => module.openWinModal())">
             Add Milestone
     </button>
+    
+    <div id="winsContainer"></div>
+    
     <div id="winModal" class="modal">
       <div class="modal-content">
         <input type="text" id="winTitleInput" placeholder="Win Title">

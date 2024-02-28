@@ -64,11 +64,13 @@
 
   <main>
     <h2>Got a Motivation to Strive?</h2>
-    <div id="goalsContainer"></div>
     <button type="button" class="addButton" 
       onclick="import('./script.js').then(module => module.openGoalModal())">
         Add Goal
     </button>
+    
+    <div id="goalsContainer"></div>
+    
     <div id="goalModal" class="modal">
       <div class="modal-content">
         <input type="text" id="goalTitleInput" placeholder="Goal Title">
