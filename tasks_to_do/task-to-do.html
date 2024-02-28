@@ -9,7 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>  
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">   
 </head>
 
 <body class="bg-gray-100">
@@ -63,10 +64,11 @@
 
   <main>
     <h2>Wanna be Productive?</h2>
-    <button type="button" onclick="import('./script.js').
+    <button type="button" class="addButton" onclick="import('./script.js').
         then(module => module.openTaskModal())">
           Add Task
     </button>
+    
     <div id="taskModal" class="modal">
         <div class="modal-content">
           <input type="text" id="taskTitleInput" placeholder="Task Title">
@@ -80,25 +82,21 @@
                   Cancel
           </button>
         </div>
-      </div>
+    </div>
+
     <div id="tasksContainer">
-      <div id="notStartedTasks" class="task-column">
-        <h3>Not Started</h3>
-        <!-- Tasks to do -->
-        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      <div class="task-column">
+        <div id="notStartedTasks"></div>
       </div>
-      <div id="inProgressTasks" class="task-column">
-        <h3>In Progress</h3>
-        <!-- Tasks in progress -->
-        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      
+      <div class="task-column">
+        <div id="inProgressTasks"></div>
       </div>
-      <div id="doneTasks" class="task-column">
-        <h3>Done</h3>
-        <!-- Completed tasks -->
-        <p>No Tasks Here.</p> <!-- Initially hidden -->
+      
+      <div class="task-column">
+        <div id="doneTasks"></div>
       </div>
-    </div>
-    </div>
+    </div>    
   </main>
   <script type="module" src="script.js"></script>
 </body>

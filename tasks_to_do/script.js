@@ -28,6 +28,7 @@ export function openTaskModal() {
 export function closeTaskModal() {
   document.getElementById('taskModal').style.display = 'none';
 }
+
 // Function to add task
 export function addTask() {
   const taskTitle = document.getElementById('taskTitleInput').value;
@@ -45,7 +46,7 @@ export function addTask() {
     }).then(() => {
       alert('Task Successfully Added!');
       closeTaskModal();
-      location.reload(); // Reload the page
+      location.reload(); 
     }).catch(error => {
       console.error('Error adding task: ', error);
     });
@@ -56,50 +57,80 @@ export function addTask() {
 
 // Function to display tasks
 function displayTasks() {
-  const notStartedTasks = document.getElementById('notStartedTasks');
-  const inProgressTasks = document.getElementById('inProgressTasks');
-  const doneTasks = document.getElementById('doneTasks');
+  const taskColumns = [
+    { status: 'Not Started', id: 'notStartedTasks' },
+    { status: 'In Progress', id: 'inProgressTasks' },
+    { status: 'Done', id: 'doneTasks' }
+  ];
 
+  // Loop through each task column
+  taskColumns.forEach(column => {
+    const taskList = document.getElementById(column.id);
+    
+    if (taskList) {
+      const taskColumn = document.createElement('div');
+      taskColumn.className = 'task-column';
+
+      const heading = document.createElement('h3');
+      heading.className = 'column-header';
+      heading.textContent = column.status;
+      taskColumn.appendChild(heading);
+
+      taskList.appendChild(taskColumn);
+    } else {
+      console.error(`Task list with ID '${column.id}' not found.`);
+    }
+  });
+
+  // Fetch tasks and display them within respective task lists
   const tasksRef = ref(database, 'tasks');
   get(tasksRef).then(snapshot => {
     if (snapshot.exists()) {
       snapshot.forEach(childSnapshot => {
         const task = childSnapshot.val();
-        const taskElement = document.createElement('div');
-        taskElement.innerHTML = `
-          <p>${task.title}</p>
-          <p>${task.description}</p>
-          <p>${new Date(task.timestamp).toLocaleString()}</p>
-          <button type="button" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'inProgress'))">
-            Start
-          </button>
-          <button type="button" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'done'))">
-            Complete
-          </button>
-          <button type="button" onclick="import('./script.js').then(module => module.editTask('${childSnapshot.key}', '${task.title}', '${task.description}'))">
-            Edit
-          </button>
-          <button type="button" onclick="import('./script.js').then(module => module.deleteTask('${childSnapshot.key}'))">
-            Delete
-          </button>
-        `;
-
-        if (task.status === 'notStarted') {
-          notStartedTasks.appendChild(taskElement);
-          notStartedTasks.querySelector('p').style.display = 'none'; 
-        } else if (task.status === 'inProgress') {
-          inProgressTasks.appendChild(taskElement);
-          inProgressTasks.querySelector('p').style.display = 'none'; 
-        } else if (task.status === 'done') {
-          doneTasks.appendChild(taskElement);
-          doneTasks.querySelector('p').style.display = 'none'; 
+        const status = task.status + 'Tasks';
+        const taskList = document.getElementById(status);
+        
+        if (taskList) {
+          const taskElement = document.createElement('div');
+          taskElement.className = 'task';
+          const taskButtons = `
+            <div class="task-actions">
+                <button type="button" onclick="import('./script.js').then(module => module.editTask('${childSnapshot.key}', '${task.title}', '${task.description}'))">
+                    <i class="fas fa-edit"></i> <!-- Edit Icon -->
+                </button>
+                <button type="button" onclick="import('./script.js').then(module => module.deleteTask('${childSnapshot.key}'))">
+                    <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
+                </button>
+            </div>
+          `;
+          taskElement.innerHTML = `
+            <div class="task-header">
+                <div class="task-datetime">${new Date(task.timestamp).toLocaleString()}</div>
+                ${taskButtons}
+            </div>
+            <h3>${task.title}</h3>
+            <p>${task.description}</p>
+            <div class="statusButtons">
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'notStarted'))">
+                Not Started
+              </button>
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'inProgress'))">
+                In Progress
+              </button>
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'done'))">
+                Completed
+              </button>
+            </div>
+          `;
+          
+          taskList.appendChild(taskElement);
+        } else {
+          console.error(`Task list with ID '${status}' not found.`);
         }
       });
     } else {
-      // Show "No Tasks Here" message when there are no tasks in each column
-      notStartedTasks.querySelector('p').style.display = 'block';
-      inProgressTasks.querySelector('p').style.display = 'block';
-      doneTasks.querySelector('p').style.display = 'block';
+      console.log('No tasks found.');
     }
   }).catch(error => {
     console.error('Error fetching tasks:', error);
