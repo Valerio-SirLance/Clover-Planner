@@ -16,8 +16,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Light / Dark Modes + Mobile Navigation Menu
+// Log out function
+export function logout() {
+    // Clear session token
+    sessionStorage.removeItem('isLoggedIn');
+    window.location.href = "../index.html";
+}
+
+// Session Token, Light / Dark Modes, Mobile Navigation Menu
 document.addEventListener('DOMContentLoaded', function() {
+    // Check for session token
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (!isLoggedIn) {
+        // Redirect user back to login page if not logged in
+        window.location.href = "../index.html"; 
+    }
+
     const toggleSwitch = document.querySelector('#toggleTheme');
     const toggleSwitchMobile = document.querySelector('#toggleThemeMobile');
     const mobileNav = document.getElementById('mobileNav'); 
@@ -57,5 +71,3 @@ document.addEventListener('DOMContentLoaded', function() {
         mobileNav.classList.toggle('show-nav');
     }
 });
-
-  

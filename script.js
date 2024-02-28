@@ -1,6 +1,6 @@
 // Firebase project configuration
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-import { getDatabase } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCeJlqfAu___gl2PxqVg9VNgjErlCmIxxQ",
@@ -17,15 +17,25 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 // Function to check password
-export function checkPassword() {
+export async function checkPassword() {
     const passwordInput = document.getElementById('passwordInput').value;
-    const correctPassword = "Clover0320";
-    // Password correct, proceed to home page
-    if (passwordInput === correctPassword) {
-        showModal("Welcome, Sir Lance!");
-    } else {
-        // Password incorrect, show error message
-        showModal("Password Incorrect, Try Again!");
+    const passwordRef = ref(database, 'password'); 
+
+    try {
+        const snapshot = await get(passwordRef);
+        const correctPassword = snapshot.val();
+
+        if (passwordInput === correctPassword) {
+            console.log("Password Confirmed!");
+            // Set session token upon successful login
+            sessionStorage.setItem('isLoggedIn', true);
+            showModal("Welcome, Sir Lance!");
+        } else {
+            showModal("Password Incorrect, Try Again!");
+        }
+    } catch (error) {
+        console.error("Error retrieving password:", error);
+        showModal("Error retrieving password. Please try again later.");
     }
 }
 
