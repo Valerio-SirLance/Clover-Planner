@@ -208,6 +208,11 @@ h2:hover, .goal .goal-actions button:hover {
   display: flex;
   flex-wrap: wrap; 
   justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgba(207, 207, 207, 0.4);
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
 }
 
 .goal, .empty {
