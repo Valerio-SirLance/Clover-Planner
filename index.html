@@ -7,6 +7,7 @@
   <link rel="icon" href="./assets/images/logo.png" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body class="bg-gray-100 flex justify-center items-center h-screen">
@@ -15,7 +16,12 @@
     <h1 class="app-title">Clover Planner</h1>
     <p class="login-text">Empowering Productivity!</p>
     <form id="loginForm" class="login-form">
-      <input type="password" id="passwordInput" placeholder="Enter Password" class="login-input">
+      <div class="relative">
+        <input type="password" id="passwordInput" placeholder="Enter Password" class="login-input">
+        <span class="password-toggle" onclick="import('./script.js').then(module => module.togglePasswordVisibility())">
+          <i id="eyeIcon" class="fas fa-eye"></i>
+        </span>
+      </div>
       <button type="button" onclick="import('./script.js').then(module => module.checkPassword())" class="login-button">Submit</button>
     </form>
     <div id="passwordModal" class="modal hidden">
