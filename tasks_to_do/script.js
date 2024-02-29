@@ -19,15 +19,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Function to open task modal
+// Function to open modal 
 export function openTaskModal() {
-  document.getElementById('taskModal').style.display = 'block';
+  const modal = document.getElementById('taskModal');
+  modal.style.display = 'block';
+  setTimeout(() => {
+      modal.querySelector('.modal-content').classList.add('show');
+  }, 50);
 }
 
-// Function to close task modal
+// Function to close modal 
 export function closeTaskModal() {
-  document.getElementById('taskModal').style.display = 'none';
+  const modal = document.getElementById('taskModal');
+  modal.querySelector('.modal-content').classList.remove('show');
+  setTimeout(() => {
+      modal.style.display = 'none';
+  }, 300);
 }
+
 
 // Function to add task
 export function addTask() {
