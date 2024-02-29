@@ -19,14 +19,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Function to open win modal
+// Function to open modal 
 export function openWinModal() {
-    document.getElementById('winModal').style.display = 'block';
+    const modal = document.getElementById('winModal');
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
 }
 
-// Function to close win modal
+// Function to close modal 
 export function closeWinModal() {
-    document.getElementById('winModal').style.display = 'none';
+    const modal = document.getElementById('winModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
 }
 
 // Function to save win
