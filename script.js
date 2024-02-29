@@ -32,6 +32,12 @@ export function togglePasswordVisibility() {
     }
 }
 
+// Function to handle form submission
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    import('./script.js').then(module => module.checkPassword());
+});
+
 // Function to check password
 export async function checkPassword() {
     const passwordInput = document.getElementById('passwordInput').value;
@@ -42,7 +48,6 @@ export async function checkPassword() {
         const correctPassword = snapshot.val();
 
         if (passwordInput === correctPassword) {
-            console.log("Password Confirmed!");
             // Set session token upon successful login
             sessionStorage.setItem('isLoggedIn', true);
             showModal("Welcome, Sir Lance!");
