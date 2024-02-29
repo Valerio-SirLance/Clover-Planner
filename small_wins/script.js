@@ -76,7 +76,7 @@ function displayWins() {
                 const win = childSnapshot.val();
                 const winElement = document.createElement('div');
                 winElement.className = 'win';
-                const winDate = new Date(win.timestamp);
+                const winDate = new Date(win.date);
                 const formattedDate = `${winDate.getMonth() + 1}/${winDate.getDate()}/${winDate.getFullYear()}`;
                 winElement.innerHTML = `
                     <div class="win-header">
