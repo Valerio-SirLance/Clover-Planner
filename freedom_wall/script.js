@@ -19,15 +19,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
-// Function to open note modal
+// Function to open modal 
 export function openNoteModal() {
-    document.getElementById('noteModal').style.display = 'block';
-  }
+    const modal = document.getElementById('noteModal');
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+}
 
-// Function to clpse note modal
+// Function to close modal 
 export function closeNoteModal() {
-    document.getElementById('noteModal').style.display = 'none';
-  }
+    const modal = document.getElementById('noteModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
 
 // Function to save note
 export function saveNote() {
