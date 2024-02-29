@@ -72,20 +72,27 @@ function displayGoals() {
     const goalsRef = ref(database, 'goals');
     get(goalsRef).then(snapshot => {
         if (snapshot.exists()) {
+            const goalsArray = [];
             snapshot.forEach(childSnapshot => {
-                const goal = childSnapshot.val();
+                goalsArray.push({ key: childSnapshot.key, value: childSnapshot.val() });
+            });
+
+            goalsArray.reverse();
+
+            goalsArray.forEach(goalData => {
+                const goal = goalData.value;
                 const goalElement = document.createElement('div');
                 goalElement.className = 'goal';
                 const goalDate = new Date(goal.dueDate);
                 const formattedDate = `${goalDate.getMonth() + 1}/${goalDate.getDate()}/${goalDate.getFullYear()}`;
                 goalElement.innerHTML = `
                     <div class="goal-header">
-                    <div class="goal-datetime">${new Date(goal.timestamp).toLocaleString()}</div>
+                        <div class="goal-datetime">${new Date(goal.timestamp).toLocaleString()}</div>
                         <div class="goal-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editGoal('${childSnapshot.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.editGoal('${goalData.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
-                            <button type="button" onclick="import('./script.js').then(module => module.deleteGoal('${childSnapshot.key}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteGoal('${goalData.key}'))">
                                 <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
                             </button>
                         </div>
@@ -103,9 +110,6 @@ function displayGoals() {
         console.error('Error fetching goals:', error);
     });
 }
-
-
-
 
 // Function to edit goal
 export function editGoal(goalKey, currentTitle, currentDescription, currentDueDate) {

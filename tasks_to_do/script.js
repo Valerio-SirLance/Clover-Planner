@@ -95,8 +95,15 @@ function displayTasks() {
   const tasksRef = ref(database, 'tasks');
   get(tasksRef).then(snapshot => {
     if (snapshot.exists()) {
+      const tasksArray = [];
       snapshot.forEach(childSnapshot => {
-        const task = childSnapshot.val();
+        tasksArray.push({ key: childSnapshot.key, value: childSnapshot.val() });
+      });
+
+      tasksArray.reverse();
+
+      tasksArray.forEach(taskData => {
+        const task = taskData.value;
         const status = task.status + 'Tasks';
         const taskList = document.getElementById(status);
         
@@ -105,10 +112,10 @@ function displayTasks() {
           taskElement.className = 'task';
           const taskButtons = `
             <div class="task-actions">
-                <button type="button" onclick="import('./script.js').then(module => module.editTask('${childSnapshot.key}', '${task.title}', '${task.description}'))">
+                <button type="button" onclick="import('./script.js').then(module => module.editTask('${taskData.key}', '${task.title}', '${task.description}'))">
                     <i class="fas fa-edit"></i> <!-- Edit Icon -->
                 </button>
-                <button type="button" onclick="import('./script.js').then(module => module.deleteTask('${childSnapshot.key}'))">
+                <button type="button" onclick="import('./script.js').then(module => module.deleteTask('${taskData.key}'))">
                     <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
                 </button>
             </div>
@@ -121,13 +128,13 @@ function displayTasks() {
             <h3>${task.title}</h3>
             <p>${task.description}</p>
             <div class="statusButtons">
-              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'notStarted'))">
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${taskData.key}', 'notStarted'))">
                 Not Started
               </button>
-              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'inProgress'))">
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${taskData.key}', 'inProgress'))">
                 In Progress
               </button>
-              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${childSnapshot.key}', 'done'))">
+              <button type="button" id="stat" onclick="import('./script.js').then(module => module.moveTask('${taskData.key}', 'done'))">
                 Completed
               </button>
             </div>
@@ -145,6 +152,7 @@ function displayTasks() {
     console.error('Error fetching tasks:', error);
   });
 }
+
 
 // Function to move task to different status
 export function moveTask(taskKey, newStatus) {

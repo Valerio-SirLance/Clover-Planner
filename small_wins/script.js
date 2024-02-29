@@ -72,8 +72,15 @@ function displayWins() {
     const winsRef = ref(database, 'smallWins');
     get(winsRef).then(snapshot => {
         if (snapshot.exists()) {
+            const winsArray = [];
             snapshot.forEach(childSnapshot => {
-                const win = childSnapshot.val();
+                winsArray.push({ key: childSnapshot.key, value: childSnapshot.val() });
+            });
+
+            winsArray.reverse();
+
+            winsArray.forEach(winData => {
+                const win = winData.value;
                 const winElement = document.createElement('div');
                 winElement.className = 'win';
                 const winDate = new Date(win.date);
@@ -82,10 +89,10 @@ function displayWins() {
                     <div class="win-header">
                     <div class="win-datetime">${new Date(win.timestamp).toLocaleString()}</div>
                         <div class="win-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editWin('${childSnapshot.key}', '${win.title}', '${win.description}', '${win.date}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.editWin('${winData.key}', '${win.title}', '${win.description}', '${win.date}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
-                            <button type="button" onclick="import('./script.js').then(module => module.deleteWin('${childSnapshot.key}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteWin('${winData.key}'))">
                                 <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
                             </button>
                         </div>
@@ -103,7 +110,6 @@ function displayWins() {
         console.error('Error fetching wins:', error);
     });
 }
-
 
 // Function to edit win
 export function editWin(winKey, currentTitle, currentDescription, currentDate) {

@@ -70,18 +70,25 @@ function displayNotes() {
     const notesRef = ref(database, 'freedomWall');
     get(notesRef).then(snapshot => {
         if (snapshot.exists()) {
+            const notesArray = [];
             snapshot.forEach(childSnapshot => {
-                const note = childSnapshot.val();
+                notesArray.push({ key: childSnapshot.key, value: childSnapshot.val() });
+            });
+
+            notesArray.reverse();
+
+            notesArray.forEach(noteData => {
+                const note = noteData.value;
                 const noteElement = document.createElement('div');
                 noteElement.classList.add('note'); 
                 noteElement.innerHTML = `
                     <div class="note-header">
                         <div class="note-datetime">${new Date(note.timestamp).toLocaleString()}</div>
                         <div class="note-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editNote('${childSnapshot.key}', '${note.title}', '${note.content}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.editNote('${noteData.key}', '${note.title}', '${note.content}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
-                            <button type="button" onclick="import('./script.js').then(module => module.deleteNote('${childSnapshot.key}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.deleteNote('${noteData.key}'))">
                                 <i class="fas fa-trash-alt"></i> <!-- Delete Icon -->
                             </button>
                         </div>
@@ -98,6 +105,7 @@ function displayNotes() {
         console.error('Error fetching notes:', error);
     });
 }
+
 
 // Function to edit note
 export function editNote(noteKey, currentTitle, currentContent) {
