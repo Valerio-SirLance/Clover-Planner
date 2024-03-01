@@ -98,7 +98,7 @@ function displayGoals() {
                         </div>
                     </div>
                     <h3>${goal.title}</h3>
-                    <p>${goal.description}</p>
+                    <p class="description">${goal.description}</p>
                     <p class="happens">Target Date: ${formattedDate}</p>
                 `;
                 goalsContainer.appendChild(goalElement);

@@ -98,7 +98,7 @@ function displayWins() {
                         </div>
                     </div>
                     <h3>${win.title}</h3>
-                    <p>${win.description}</p>
+                    <p class="description">${win.description}</p>
                     <p class="happens">Date Achieved: ${formattedDate}</p>
                 `;
                 winsContainer.appendChild(winElement);
