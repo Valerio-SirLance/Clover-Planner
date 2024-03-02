@@ -381,6 +381,10 @@ h2:hover, .task-column .column-header:hover, .task .task-actions button:hover {
   transform: translateY(-50px);
 }
 
+#editTaskModal .modal-content {
+  width: 50%;
+}
+
 .modal-content.show {
   opacity: 1;
   transform: translateY(0);
@@ -461,6 +465,10 @@ h2:hover, .task-column .column-header:hover, .task .task-actions button:hover {
     transform: translateX(16px);
   }
   /* End of CSS of Navigation Area */
+
+  #editTaskModal .modal-content {
+    width: 80%;
+  }
   
   .task, .empty {
     width: 100%;
@@ -628,6 +636,10 @@ h2:hover, .task-column .column-header:hover, .task .task-actions button:hover {
   h2 {
     font-size: 1.1rem;
     margin-top: 2rem; 
+  }
+
+  #editTaskModal .modal-content {
+    width: 80%;
   }
 
   #tasksContainer {

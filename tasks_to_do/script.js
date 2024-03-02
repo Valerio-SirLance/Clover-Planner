@@ -112,7 +112,7 @@ function displayTasks() {
           taskElement.className = 'task';
           const taskButtons = `
             <div class="task-actions">
-                <button type="button" onclick="import('./script.js').then(module => module.editTask('${taskData.key}', '${task.title}', '${task.description}'))">
+                <button type="button" onclick="import('./script.js').then(module => module.openEditTaskModal('${taskData.key}', '${task.title}', '${task.description}'))">
                     <i class="fas fa-edit"></i> <!-- Edit Icon -->
                 </button>
                 <button type="button" onclick="import('./script.js').then(module => module.deleteTask('${taskData.key}'))">
@@ -167,22 +167,52 @@ export function moveTask(taskKey, newStatus) {
     });
 }
 
-// Function to edit task
-export function editTask(taskKey, currentTitle, currentDescription) {
-  const newTitle = prompt('Enter New Title:', currentTitle);
-  const newDescription = prompt('Enter New Description:', currentDescription);
 
-  if (newTitle && newDescription) {
-    const taskRef = ref(database, `tasks/${taskKey}`);
-    update(taskRef, {
-      title: newTitle,
-      description: newDescription
-    }).then(() => {
-      alert('Task Successfully Updated!');
-      location.reload(); 
-    }).catch(error => {
-      console.error('Error updating task: ', error);
-    });
+// Function to open edit task modal
+export function openEditTaskModal(taskKey, currentTitle, currentContent) {
+  const modal = document.getElementById('editTaskModal');
+  const editTaskTitleInput = document.getElementById('editTaskTitleInput');
+  const editTaskDescriptionInput = document.getElementById('editTaskDescriptionInput');
+
+  editTaskTitleInput.value = currentTitle;
+  editTaskDescriptionInput.value = currentContent;
+  document.getElementById('editTaskKey').value = taskKey;
+
+  modal.style.display = 'block';
+  setTimeout(() => {
+      modal.querySelector('.modal-content').classList.add('show');
+  }, 50);
+}
+
+// Function to close edit task modal
+export function closeEditTaskModal() {
+  const modal = document.getElementById('editTaskModal');
+  modal.querySelector('.modal-content').classList.remove('show');
+  setTimeout(() => {
+      modal.style.display = 'none';
+  }, 300);
+}
+
+// Function to save edited task
+export function saveEditedTask() {
+  const taskKey = document.getElementById('editTaskKey').value;
+  const taskTitle = document.getElementById('editTaskTitleInput').value;
+  const taskDescription = document.getElementById('editTaskDescriptionInput').value;
+
+  if (taskTitle && taskDescription) {
+      const taskRef = ref(database, 'tasks/' + taskKey);
+      update(taskRef, {
+          title: taskTitle,
+          description: taskDescription
+      }).then(() => {
+          alert('Task Successfully Updated!');
+          closeEditTaskModal();
+          location.reload();
+      }).catch(error => {
+          console.error('Error updating task: ', error);
+      });
+  } else {
+      alert('Please Enter Both Task Title and Description.');
   }
 }
 

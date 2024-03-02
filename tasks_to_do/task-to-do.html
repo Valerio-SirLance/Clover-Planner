@@ -87,6 +87,21 @@
         </div>
     </div>
 
+    <div id="editTaskModal" class="modal">
+      <div class="modal-content">
+        <h2>Edit Note</h2>
+        <input type="hidden" id="editTaskKey">
+        <input type="text" id="editTaskTitleInput" placeholder="Task Title">
+        <textarea id="editTaskDescriptionInput" placeholder="Task Description"></textarea>
+        <button type="button" onclick="import('./script.js').then(module => module.saveEditedTask())">
+          Save
+        </button>
+        <button type="button" onclick="import('./script.js').then(module => module.closeEditTaskModal())">
+          Cancel
+        </button>
+      </div>
+    </div>
+
     <div id="tasksContainer">
       <div class="task-column">
         <div id="notStartedTasks"></div>
