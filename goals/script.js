@@ -89,7 +89,7 @@ function displayGoals() {
                     <div class="goal-header">
                         <div class="goal-datetime">${new Date(goal.timestamp).toLocaleString()}</div>
                         <div class="goal-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editGoal('${goalData.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.openEditGoalModal('${goalData.key}', '${goal.title}', '${goal.description}', '${goal.dueDate}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
                             <button type="button" onclick="import('./script.js').then(module => module.deleteGoal('${goalData.key}'))">
@@ -111,11 +111,39 @@ function displayGoals() {
     });
 }
 
-// Function to edit goal
-export function editGoal(goalKey, currentTitle, currentDescription, currentDueDate) {
-    const newTitle = prompt('Enter New Title:', currentTitle);
-    const newDescription = prompt('Enter New Description:', currentDescription);
-    const newDueDate = prompt('Enter New Due Date:', currentDueDate);
+// Function to open edit modal 
+export function openEditGoalModal(goalKey, currentTitle, currentDescription, currentDueDate) {
+    const modal = document.getElementById('editGoalModal');
+    const editGoalTitleInput = document.getElementById('editGoalTitleInput');
+    const editGoalDescriptionInput = document.getElementById('editGoalDescriptionInput');
+    const editGoalDueDateInput = document.getElementById('editGoalDueDateInput');
+  
+    editGoalTitleInput.value = currentTitle;
+    editGoalDescriptionInput.value = currentDescription;
+    editGoalDueDateInput.value = currentDueDate;
+    document.getElementById('editGoalKey').value = goalKey;
+  
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+}
+
+// Function to close edit modal 
+export function closeEditGoalModal() {
+    const modal = document.getElementById('editGoalModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Function to save edited goal
+export function saveEditedGoal() {
+    const goalKey = document.getElementById('editGoalKey').value;
+    const newTitle = document.getElementById('editGoalTitleInput').value;
+    const newDescription = document.getElementById('editGoalDescriptionInput').value;
+    const newDueDate = document.getElementById('editGoalDueDateInput').value;
   
     if (newTitle && newDescription && newDueDate) {
         const goalRef = ref(database, 'goals/' + goalKey);
@@ -125,10 +153,13 @@ export function editGoal(goalKey, currentTitle, currentDescription, currentDueDa
             dueDate: newDueDate
         }).then(() => {
             alert('Goal Successfully Updated!');
-            location.reload();
+            closeEditGoalModal();
+            location.reload(); 
         }).catch(error => {
             console.error('Error updating goal: ', error);
         });
+    } else {
+        alert('Please Enter Goal Title, Description, and Due Date.');
     }
 }
 
