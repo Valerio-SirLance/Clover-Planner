@@ -339,6 +339,10 @@ h2:hover, .note .note-actions button:hover {
   transform: translateY(-50px);
 }
 
+#editNoteModal .modal-content {
+  width: 50%;
+}
+
 .modal-content.show {
   opacity: 1;
   transform: translateY(0);
@@ -419,6 +423,10 @@ h2:hover, .note .note-actions button:hover {
     transform: translateX(16px);
   }
   /* End of CSS of Navigation Area */
+
+  #editNoteModal .modal-content {
+    width: 80%;
+  }
 
   #notesContainer {
     margin-top: 1rem;
@@ -575,6 +583,10 @@ h2:hover, .note .note-actions button:hover {
   h2 {
     font-size: 1.1rem;
     margin-top: 2rem; 
+  }
+
+  #editNoteModal .modal-content {
+    width: 80%;
   }
 
   #notesContainer {

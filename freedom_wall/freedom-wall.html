@@ -88,6 +88,22 @@
         </button>
       </div>
     </div>
+
+    <div id="editNoteModal" class="modal">
+      <div class="modal-content">
+        <h2>Edit Note</h2>
+        <input type="hidden" id="editNoteKey">
+        <input type="text" id="editNoteTitleInput" placeholder="Note Title">
+        <textarea id="editNoteContentInput" placeholder="Note Description"></textarea>
+        <button type="button" onclick="import('./script.js').then(module => module.saveEditedNote())">
+          Save
+        </button>
+        <button type="button" onclick="import('./script.js').then(module => module.closeEditNoteModal())">
+          Cancel
+        </button>
+      </div>
+    </div>
+
   </main>
   <script type="module" src="script.js"></script>
 </body>

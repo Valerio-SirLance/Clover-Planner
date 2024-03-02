@@ -85,7 +85,7 @@ function displayNotes() {
                     <div class="note-header">
                         <div class="note-datetime">${new Date(note.timestamp).toLocaleString()}</div>
                         <div class="note-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editNote('${noteData.key}', '${note.title}', '${note.content}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.openEditNoteModal('${noteData.key}', '${note.title}', '${note.content}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
                             <button type="button" onclick="import('./script.js').then(module => module.deleteNote('${noteData.key}'))">
@@ -107,22 +107,51 @@ function displayNotes() {
 }
 
 
-// Function to edit note
-export function editNote(noteKey, currentTitle, currentContent) {
-    const newTitle = prompt('Enter New Title:', currentTitle);
-    const newContent = prompt('Enter New Content:', currentContent);
+// Function to open edit note modal
+export function openEditNoteModal(noteKey, currentTitle, currentContent) {
+    const modal = document.getElementById('editNoteModal');
+    const editNoteTitleInput = document.getElementById('editNoteTitleInput');
+    const editNoteContentInput = document.getElementById('editNoteContentInput');
   
-    if (newTitle && newContent) {
+    editNoteTitleInput.value = currentTitle;
+    editNoteContentInput.value = currentContent;
+    document.getElementById('editNoteKey').value = noteKey;
+  
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+}
+
+// Function to close edit note modal
+export function closeEditNoteModal() {
+    const modal = document.getElementById('editNoteModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Function to save edited note
+export function saveEditedNote() {
+    const noteKey = document.getElementById('editNoteKey').value;
+    const noteTitle = document.getElementById('editNoteTitleInput').value;
+    const noteContent = document.getElementById('editNoteContentInput').value;
+  
+    if (noteTitle && noteContent) {
         const noteRef = ref(database, 'freedomWall/' + noteKey);
         update(noteRef, {
-            title: newTitle,
-            content: newContent
+            title: noteTitle,
+            content: noteContent
         }).then(() => {
             alert('Note Successfully Updated!');
-            location.reload(); 
+            closeEditNoteModal();
+            location.reload();
         }).catch(error => {
             console.error('Error updating note: ', error);
         });
+    } else {
+        alert('Please Enter Both Note Title and Content.');
     }
 }
 
