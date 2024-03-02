@@ -89,7 +89,7 @@ function displayWins() {
                     <div class="win-header">
                     <div class="win-datetime">${new Date(win.timestamp).toLocaleString()}</div>
                         <div class="win-actions">
-                            <button type="button" onclick="import('./script.js').then(module => module.editWin('${winData.key}', '${win.title}', '${win.description}', '${win.date}'))">
+                            <button type="button" onclick="import('./script.js').then(module => module.openEditWinModal('${winData.key}', '${win.title}', '${win.description}', '${win.date}'))">
                                 <i class="fas fa-edit"></i> <!-- Edit Icon -->
                             </button>
                             <button type="button" onclick="import('./script.js').then(module => module.deleteWin('${winData.key}'))">
@@ -111,11 +111,39 @@ function displayWins() {
     });
 }
 
-// Function to edit win
-export function editWin(winKey, currentTitle, currentDescription, currentDate) {
-    const newTitle = prompt('Enter New Title:', currentTitle);
-    const newDescription = prompt('Enter New Description:', currentDescription);
-    const newDate = prompt('Enter New Date:', currentDate);
+// Function to open edit modal 
+export function openEditWinModal(winKey, currentTitle, currentDescription, currentDate) {
+    const modal = document.getElementById('editWinModal');
+    const editWinTitleInput = document.getElementById('editWinTitleInput');
+    const editWinDescriptionInput = document.getElementById('editWinDescriptionInput');
+    const editWinDateInput = document.getElementById('editWinDateInput');
+  
+    editWinTitleInput.value = currentTitle;
+    editWinDescriptionInput.value = currentDescription;
+    editWinDateInput.value = currentDate;
+    document.getElementById('editWinKey').value = winKey;
+  
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+}
+
+// Function to close edit modal 
+export function closeEditWinModal() {
+    const modal = document.getElementById('editWinModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Function to save edited win
+export function saveEditedWin() {
+    const winKey = document.getElementById('editWinKey').value;
+    const newTitle = document.getElementById('editWinTitleInput').value;
+    const newDescription = document.getElementById('editWinDescriptionInput').value;
+    const newDate = document.getElementById('editWinDateInput').value;
   
     if (newTitle && newDescription && newDate) {
         const winRef = ref(database, 'smallWins/' + winKey);
@@ -125,10 +153,13 @@ export function editWin(winKey, currentTitle, currentDescription, currentDate) {
             date: newDate
         }).then(() => {
             alert('Win Successfully Updated!');
+            closeEditWinModal();
             location.reload(); 
         }).catch(error => {
             console.error('Error updating win: ', error);
         });
+    } else {
+        alert('Please Enter Win Title, Description, and Date.');
     }
 }
 

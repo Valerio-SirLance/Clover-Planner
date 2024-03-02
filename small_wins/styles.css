@@ -330,6 +330,7 @@ h2:hover, .win .win-actions button:hover {
   transition: opacity 0.3s ease;
 }
 
+
 .modal-content {
   background-color: #fff;
   border-radius: 0.5rem;
@@ -341,6 +342,10 @@ h2:hover, .win .win-actions button:hover {
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
   transform: translateY(-50px);
+}
+
+#editWinModal .modal-content {
+  width: 50%;
 }
 
 .modal-content.show {
@@ -442,6 +447,10 @@ h2:hover, .win .win-actions button:hover {
     transform: translateX(16px);
   }
   /* End of CSS of Navigation Area */
+
+  #editWinModal .modal-content {
+    width: 80%;
+  }
 
   #winsContainer {
     margin-top: 1rem;
@@ -602,6 +611,10 @@ h2:hover, .win .win-actions button:hover {
   h2 {
     font-size: 1.1rem;
     margin-top: 2rem; 
+  }
+
+  #editWinModal .modal-content {
+    width: 80%;
   }
 
   #winsContainer {

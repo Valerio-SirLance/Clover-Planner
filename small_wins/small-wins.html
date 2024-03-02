@@ -90,6 +90,23 @@
         </button>
       </div>
     </div>
+
+    <div id="editWinModal" class="modal">
+      <div class="modal-content">
+        <h2>Edit Milestone</h2>
+        <input type="hidden" id="editWinKey">
+        <input type="text" id="editWinTitleInput" placeholder="Win Title">
+        <textarea id="editWinDescriptionInput" placeholder="Win Description"></textarea>
+        <input type="date" id="editWinDateInput">
+        <button type="button" onclick="import('./script.js').then(module => module.saveEditedWin())">
+          Save
+        </button>
+        <button type="button" onclick="import('./script.js').then(module => module.closeEditWinModal())">
+          Cancel
+        </button>
+      </div>
+    </div>
+
   </main>
   <script type="module" src="script.js"></script>
 </body>
