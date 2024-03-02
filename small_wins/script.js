@@ -85,6 +85,9 @@ function displayWins() {
                 winElement.className = 'win';
                 const winDate = new Date(win.date);
                 const formattedDate = `${winDate.getMonth() + 1}/${winDate.getDate()}/${winDate.getFullYear()}`;
+                winElement.addEventListener('click', () => {
+                    openWinFullModal(win.title, win.description, win.date);
+                });
                 winElement.innerHTML = `
                     <div class="win-header">
                     <div class="win-datetime">${new Date(win.timestamp).toLocaleString()}</div>
@@ -110,6 +113,35 @@ function displayWins() {
         console.error('Error fetching wins:', error);
     });
 }
+
+// Function to open modal with full win content
+export function openWinFullModal(title, description, date) {
+    const modal = document.getElementById('winFullModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalContent');
+    const modalDate = document.getElementById('modalDate');
+    const winDate = new Date(date);
+    const formattedDate = `${winDate.getMonth() + 1}/${winDate.getDate()}/${winDate.getFullYear()}`;
+  
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    modalDate.innerHTML = `Date Achieved: ${formattedDate}`;
+  
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+    console.log("opening win " + title);
+  }
+  
+  // Function to close modal 
+  export function closeWinFullModal() {
+    const modal = document.getElementById('winFullModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+  }
 
 // Function to open edit modal 
 export function openEditWinModal(winKey, currentTitle, currentDescription, currentDate) {

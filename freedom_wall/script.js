@@ -81,6 +81,9 @@ function displayNotes() {
                 const note = noteData.value;
                 const noteElement = document.createElement('div');
                 noteElement.classList.add('note'); 
+                noteElement.addEventListener('click', () => {
+                    openNoteFullModal(note.title, note.content);
+                });
                 noteElement.innerHTML = `
                     <div class="note-header">
                         <div class="note-datetime">${new Date(note.timestamp).toLocaleString()}</div>
@@ -106,6 +109,30 @@ function displayNotes() {
     });
 }
 
+// Function to open modal with full note content
+export function openNoteFullModal(title, content) {
+    const modal = document.getElementById('noteFullModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalContent = document.getElementById('modalContent');
+
+    modalTitle.textContent = title;
+    modalContent.textContent = content;
+
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+    console.log("opening note " + title);
+}
+
+// Function to close modal 
+export function closeNoteFullModal() {
+    const modal = document.getElementById('noteFullModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
 
 // Function to open edit note modal
 export function openEditNoteModal(noteKey, currentTitle, currentContent) {

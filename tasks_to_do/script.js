@@ -110,6 +110,9 @@ function displayTasks() {
         if (taskList) {
           const taskElement = document.createElement('div');
           taskElement.className = 'task';
+          taskElement.addEventListener('click', () => {
+              openTaskFullModal(task.title, task.description);
+          });
           const taskButtons = `
             <div class="task-actions">
                 <button type="button" onclick="import('./script.js').then(module => module.openEditTaskModal('${taskData.key}', '${task.title}', '${task.description}'))">
@@ -153,6 +156,30 @@ function displayTasks() {
   });
 }
 
+// Function to open modal with full task content
+export function openTaskFullModal(title, description) {
+  const modal = document.getElementById('taskFullModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalContent');
+
+  modalTitle.textContent = title;
+  modalDescription.textContent = description;
+
+  modal.style.display = 'block';
+  setTimeout(() => {
+      modal.querySelector('.modal-content').classList.add('show');
+  }, 50);
+  console.log("opening task " + title);
+}
+
+// Function to close modal 
+export function closeTaskFullModal() {
+  const modal = document.getElementById('taskFullModal');
+  modal.querySelector('.modal-content').classList.remove('show');
+  setTimeout(() => {
+      modal.style.display = 'none';
+  }, 300);
+}
 
 // Function to move task to different status
 export function moveTask(taskKey, newStatus) {

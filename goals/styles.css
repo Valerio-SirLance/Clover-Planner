@@ -305,7 +305,7 @@ h2:hover, .goal .goal-actions button:hover {
   margin-bottom: 0.5rem;
 }
 
-.goal p {
+.goal p, .modal-content p {
   font-size: 1.1rem;
   color: #666;
   text-align: center;
@@ -402,6 +402,24 @@ h2:hover, .goal .goal-actions button:hover {
 .modal-content button:hover {
   transform: scale(1.02); 
   background-color: #379938;
+}
+
+.modal-content h2 {
+  color: #333;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* Tablet Responsive Styles */
@@ -639,7 +657,7 @@ h2:hover, .goal .goal-actions button:hover {
     margin-top: 0.5rem;
   }
   
-  .goal p {
+  .goal p, .modal-content p {
     font-size: 0.6rem;
     margin-bottom: 0.5rem;
   }

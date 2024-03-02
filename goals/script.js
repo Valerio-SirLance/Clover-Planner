@@ -85,6 +85,9 @@ function displayGoals() {
                 goalElement.className = 'goal';
                 const goalDate = new Date(goal.dueDate);
                 const formattedDate = `${goalDate.getMonth() + 1}/${goalDate.getDate()}/${goalDate.getFullYear()}`;
+                goalElement.addEventListener('click', () => {
+                    openGoalFullModal(goal.title, goal.description, goal.dueDate);
+                });
                 goalElement.innerHTML = `
                     <div class="goal-header">
                         <div class="goal-datetime">${new Date(goal.timestamp).toLocaleString()}</div>
@@ -110,6 +113,36 @@ function displayGoals() {
         console.error('Error fetching goals:', error);
     });
 }
+
+// Function to open modal with full goal content
+export function openGoalFullModal(title, description, dueDate) {
+    const modal = document.getElementById('goalFullModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalContent');
+    const modalDate = document.getElementById('modalDate');
+    const goalDate = new Date(dueDate);
+    const formattedDate = `${goalDate.getMonth() + 1}/${goalDate.getDate()}/${goalDate.getFullYear()}`;
+  
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    modalDate.innerHTML = `Target Date: ${formattedDate}`;
+  
+    modal.style.display = 'block';
+    setTimeout(() => {
+        modal.querySelector('.modal-content').classList.add('show');
+    }, 50);
+    console.log("opening goal " + title);
+  }
+  
+  // Function to close modal 
+  export function closeGoalFullModal() {
+    const modal = document.getElementById('goalFullModal');
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+  }
+
 
 // Function to open edit modal 
 export function openEditGoalModal(goalKey, currentTitle, currentDescription, currentDueDate) {
