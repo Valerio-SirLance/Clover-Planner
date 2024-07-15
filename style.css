@@ -185,6 +185,14 @@ input:focus + .slider {
 /* End of Switch Slider Styles */
 /* End of CSS of Navigation Area */
 
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  height: 100%; 
+}
+
 h2 {
   font-size: 2.2rem;
   font-weight: 700;
@@ -201,8 +209,34 @@ h2:hover, .note .note-actions button:hover, .task-column .column-header:hover,
   transform: translateY(-5px);
 }
 
-[data-theme='dark'] h2, [data-theme='dark'] .task-column .column-header {
+[data-theme='dark'] h2, [data-theme='dark'] .option, 
+[data-theme='dark'] .task-column .column-header {
   color: #d5d2d2;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 0 0 0 ;  
+}
+
+.option {
+  width: calc(25% - 2rem); 
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin: 0 1rem;
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+}
+
+.option img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem; 
 }
 
 #notesContainer, #winsContainer, #goalsContainer {
@@ -374,18 +408,18 @@ h2:hover, .note .note-actions button:hover, .task-column .column-header:hover,
   color: #ccc;
 }
 
-[data-theme='dark'] .note, [data-theme='dark'] .task, 
-[data-theme='dark'] .win, [data-theme='dark'] .goal, 
-[data-theme='dark'] .empty {
+[data-theme='dark'] .option, [data-theme='dark'] .note, 
+[data-theme='dark'] .task, [data-theme='dark'] .win, 
+[data-theme='dark'] .goal, [data-theme='dark'] .empty {
   background-color: #d5d2d2;
 }
 
-.note:hover, .task:hover, .win:hover, .goal:hover, 
+.option:hover, .note:hover, .task:hover, .win:hover, .goal:hover, 
 .addButton:hover, .empty:hover {
   transform: scale(1.05); 
 }
 
-.note h3, .task h3, .win h3, .goal h3, .empty {
+.option h3, .note h3, .task h3, .win h3, .goal h3, .empty {
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -406,7 +440,7 @@ h2:hover, .note .note-actions button:hover, .task-column .column-header:hover,
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.note p, .task p, .win p, .goal p, .modal-content p {
+.option p, .note p, .task p, .win p, .goal p, .modal-content p {
   font-size: 1.1rem;
   color: #666;
   text-align: center;
@@ -629,6 +663,30 @@ h2:hover, .note .note-actions button:hover, .task-column .column-header:hover,
 
   .modal-content h2 {
     font-size: 1.25rem;
+  }
+
+  .options {
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+    margin: 3rem 0 0 0;
+  }
+
+  .option {
+    width: calc(50% - 2rem); 
+    margin: 0.5rem;
+  }
+
+  .option img {
+    width: 80px; 
+    height: 80px;
+  }
+
+  .option h3 {
+    font-size: 1.2rem; 
+  }
+
+  .option p {
+    font-size: 1rem; 
   }
 }
 
@@ -863,6 +921,35 @@ h2:hover, .note .note-actions button:hover, .task-column .column-header:hover,
   .modal-content button {
     padding: 7px 10px;
     margin: 4px 0;
+  }
+
+  .options {
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+    margin: 2rem 0 0 0;
+  }
+
+  .option {
+    width: calc(50% - 2rem); 
+    margin: 0.5rem;
+    padding: 15px;
+  }
+
+  .option img {
+    width: 40px; 
+    height: 40px;
+    margin: 0;
+  }
+
+  .option h3 {
+    font-size: 0.8rem; 
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .option p {
+    font-size: 0.5rem; 
+    margin: 0;
   }
 }
 
