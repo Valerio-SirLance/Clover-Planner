@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://likha.website/">
+  <a href="https://clover-planner.netlify.app/">
     <img src="https://github.com/Valerio-SirLance/clover-planner/blob/main/assets/svg%20header.svg" alt="Kajas Logo" width="max-content" padding="0"/>
   </a>
 
