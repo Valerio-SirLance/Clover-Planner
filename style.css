@@ -195,7 +195,8 @@ h2 {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
+h2:hover, .note .note-actions button:hover, 
+.win .win-actions button:hover, .goal .goal-actions button:hover {
   transform: translateY(-5px);
 }
 
@@ -203,8 +204,7 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   color: #d5d2d2;
 }
 
-#winsContainer,
-#goalsContainer {
+#notesContainer, #winsContainer, #goalsContainer {
   margin-top: 2rem;
   display: flex;
   flex-wrap: wrap; 
@@ -216,7 +216,7 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   border-radius: 0.5rem;
 }
 
-.win, .goal, .empty {
+.note, .win, .goal, .empty {
   width: calc(21.4% - 20px);
   height: 250px;
   padding: 1rem;
@@ -242,23 +242,24 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   justify-content: center;
 }
 
-.win .win-header, .goal .goal-header {
+.note .note-header, .win .win-header, .goal .goal-header {
   display: flex;
   justify-content: stretch;
   align-items: center;
 }
 
-.win .win-datetime, .goal .goal-datetime {
+.note .note-datetime, .win .win-datetime, .goal .goal-datetime {
   font-size: 0.8rem;
   color: #666;
   margin-right: 5rem;
 }
 
-.win .win-actions, .goal .goal-actions {
+.note .note-actions, .win .win-actions, .goal .goal-actions {
   display: flex;
   order: 2;
 }
 
+.note .note-actions button, 
 .win .win-actions button, .goal .goal-actions button {
   background: none;
   border: none;
@@ -289,25 +290,27 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   color: #ccc;
 }
 
+[data-theme='dark'] .note, 
 [data-theme='dark'] .win, [data-theme='dark'] .goal, 
 [data-theme='dark'] .empty {
   background-color: #d5d2d2;
 }
 
-.win:hover, .goal:hover, .addButton:hover, .empty:hover {
+.note:hover, .win:hover, .goal:hover, .addButton:hover, .empty:hover {
   transform: scale(1.05); 
 }
 
-.win h3, .goal h3, .empty {
+.note h3, .win h3, .goal h3, .empty {
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
   color: #333;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+  word-break: break-word;
 }
 
-.win p, .goal p, .modal-content p {
+.note p, .win p, .goal p, .modal-content p {
   font-size: 1.1rem;
   color: #666;
   text-align: center;
@@ -345,6 +348,7 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   transform: translateY(-50px);
 }
 
+#editNoteModal .modal-content, 
 #editWinModal .modal-content, #editGoalModal .modal-content {
   width: 50%;
 }
@@ -467,15 +471,16 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   }
   /* End of CSS of Navigation Area */
 
+  #editNoteModal .modal-content, 
   #editWinModal .modal-content, #editGoalModal .modal-content {
     width: 80%;
   }
 
-  #winsContainer, #goalsContainer {
+  #notesContainer, #winsContainer, #goalsContainer {
     margin-top: 1rem;
   }
   
-  .win, .goal, .empty {
+  .note, .win, .goal, .empty {
     width: 40%;
     height: 200px;
   }
@@ -487,7 +492,7 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
     margin: 0.5rem 35%;
   }
 
-  .win .win-datetime, .goal .goal-datetime {
+  .note .note-datetime, .win .win-datetime, .goal .goal-datetime {
     font-size: 0.6rem;
     margin-right: 1rem;
   }
@@ -632,15 +637,16 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
     margin-top: 2rem; 
   }
 
+  #editNoteModal .modal-content,
   #editWinModal .modal-content, #editGoalModal .modal-content {
     width: 80%;
   }
 
-  #winsContainer, #goalsContainer {
+  #notesContainer, #winsContainer, #goalsContainer {
     margin-top: 0.8rem;
   }
   
-  .win, .goal, .empty {
+  .note, .win, .goal, .empty {
     width: 40%;
     height: 150px;
     padding: 0.5rem;
@@ -655,21 +661,23 @@ h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
     margin: 0.5rem 30%;
   }
 
-  .win h3, .goal h3, .empty {
+  .note h3, .win h3, .goal h3, .empty {
     font-size: 0.8rem;
     margin-top: 0.5rem;
   }
   
-  .win p, .modal-content p, .goal p, .modal-content p {
+  .note p, .win p, .goal p, .modal-content p {
     font-size: 0.6rem;
     margin-bottom: 0.5rem;
   }
 
+  .note .note-datetime, 
   .win .win-datetime, .goal .goal-datetime {
     font-size: 0.35rem;
     margin-right: 1rem;
   }
 
+  .note .note-actions button,
   .win .win-actions button, .goal .goal-actions button {
     font-size: 0.5rem;
     margin-left: 0.5rem;
