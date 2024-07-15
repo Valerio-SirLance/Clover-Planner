@@ -19,7 +19,7 @@ body {
 }
 
 [data-theme='light'] body {
-  background-image: url('../assets/images/bg_light.png');
+  background-image: url('assets/images/bg_light.png');
 }
 
 /* Dark Mode */
@@ -28,7 +28,7 @@ body {
 }
 
 [data-theme='dark'] body {
-  background-image: url('../assets/images/bg_dark.png');
+  background-image: url('assets/images/bg_dark.png');
 }
 
 [data-theme='dark'] h1 {
@@ -195,7 +195,7 @@ h2 {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-h2:hover, .goal .goal-actions button:hover {
+h2:hover, .win .win-actions button:hover, .goal .goal-actions button:hover {
   transform: translateY(-5px);
 }
 
@@ -203,6 +203,7 @@ h2:hover, .goal .goal-actions button:hover {
   color: #d5d2d2;
 }
 
+#winsContainer,
 #goalsContainer {
   margin-top: 2rem;
   display: flex;
@@ -215,7 +216,7 @@ h2:hover, .goal .goal-actions button:hover {
   border-radius: 0.5rem;
 }
 
-.goal, .empty {
+.win, .goal, .empty {
   width: calc(21.4% - 20px);
   height: 250px;
   padding: 1rem;
@@ -241,24 +242,24 @@ h2:hover, .goal .goal-actions button:hover {
   justify-content: center;
 }
 
-.goal .goal-header {
+.win .win-header, .goal .goal-header {
   display: flex;
   justify-content: stretch;
   align-items: center;
 }
 
-.goal .goal-datetime {
+.win .win-datetime, .goal .goal-datetime {
   font-size: 0.8rem;
   color: #666;
   margin-right: 5rem;
 }
 
-.goal .goal-actions {
+.win .win-actions, .goal .goal-actions {
   display: flex;
   order: 2;
 }
 
-.goal .goal-actions button {
+.win .win-actions button, .goal .goal-actions button {
   background: none;
   border: none;
   cursor: pointer;
@@ -268,13 +269,13 @@ h2:hover, .goal .goal-actions button:hover {
 }
 
 .addButton {
-  width: 10%; 
+  width: 20%; 
   padding: 0.5rem;
   background-color: #45aa48;
   border-radius: 0.5rem;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  margin: 1rem 45%;
+  margin: 1rem 40%;
   align-items: center;
   font-size: 1.5rem;
   font-weight: 600;
@@ -288,15 +289,16 @@ h2:hover, .goal .goal-actions button:hover {
   color: #ccc;
 }
 
-[data-theme='dark'] .goal, [data-theme='dark'] .empty {
+[data-theme='dark'] .win, [data-theme='dark'] .goal, 
+[data-theme='dark'] .empty {
   background-color: #d5d2d2;
 }
 
-.goal:hover, .addButton:hover, .empty:hover {
+.win:hover, .goal:hover, .addButton:hover, .empty:hover {
   transform: scale(1.05); 
 }
 
-.goal h3, .empty {
+.win h3, .goal h3, .empty {
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
@@ -305,14 +307,14 @@ h2:hover, .goal .goal-actions button:hover {
   margin-bottom: 0.5rem;
 }
 
-.goal p, .modal-content p {
+.win p, .goal p, .modal-content p {
   font-size: 1.1rem;
   color: #666;
   text-align: center;
   margin-bottom: 0.5rem;
 }
 
-.goal .description {
+.win .description, .goal .description {
   overflow-y: auto;
 }
 
@@ -329,6 +331,7 @@ h2:hover, .goal .goal-actions button:hover {
   transition: opacity 0.3s ease;
 }
 
+
 .modal-content {
   background-color: #fff;
   border-radius: 0.5rem;
@@ -342,7 +345,7 @@ h2:hover, .goal .goal-actions button:hover {
   transform: translateY(-50px);
 }
 
-#editGoalModal .modal-content {
+#editWinModal .modal-content, #editGoalModal .modal-content {
   width: 50%;
 }
 
@@ -464,32 +467,32 @@ h2:hover, .goal .goal-actions button:hover {
   }
   /* End of CSS of Navigation Area */
 
-  #editGoalModal .modal-content {
+  #editWinModal .modal-content, #editGoalModal .modal-content {
     width: 80%;
   }
-  
-  #goalsContainer {
+
+  #winsContainer, #goalsContainer {
     margin-top: 1rem;
   }
   
-  .goal, .empty {
+  .win, .goal, .empty {
     width: 40%;
     height: 200px;
   }
 
   .addButton {
-    width: 20%;
+    width: 30%;
     min-height: 50px;
     padding: 0.5rem;
-    margin: 0.5rem 40%;
+    margin: 0.5rem 35%;
   }
 
-  .goal .goal-datetime {
+  .win .win-datetime, .goal .goal-datetime {
     font-size: 0.6rem;
     margin-right: 1rem;
   }
 
-  .goal .happens {
+  .win .happens, .goal .happens {
     font-size: 0.8rem;
   }
 
@@ -629,15 +632,15 @@ h2:hover, .goal .goal-actions button:hover {
     margin-top: 2rem; 
   }
 
-  #editGoalModal .modal-content {
+  #editWinModal .modal-content, #editGoalModal .modal-content {
     width: 80%;
   }
 
-  #goalsContainer {
+  #winsContainer, #goalsContainer {
     margin-top: 0.8rem;
   }
   
-  .goal, .empty {
+  .win, .goal, .empty {
     width: 40%;
     height: 150px;
     padding: 0.5rem;
@@ -645,34 +648,34 @@ h2:hover, .goal .goal-actions button:hover {
   }
 
   .addButton {
-    width: 30%;
+    width: 40%;
     font-size: 0.8rem;
     min-height: 50px;
     padding: 0.5rem;
-    margin: 0.5rem 35%;
+    margin: 0.5rem 30%;
   }
 
-  .goal h3, .empty {
+  .win h3, .goal h3, .empty {
     font-size: 0.8rem;
     margin-top: 0.5rem;
   }
   
-  .goal p, .modal-content p {
+  .win p, .modal-content p, .goal p, .modal-content p {
     font-size: 0.6rem;
     margin-bottom: 0.5rem;
   }
 
-  .goal .goal-datetime {
+  .win .win-datetime, .goal .goal-datetime {
     font-size: 0.35rem;
     margin-right: 1rem;
   }
 
-  .goal .goal-actions button {
+  .win .win-actions button, .goal .goal-actions button {
     font-size: 0.5rem;
     margin-left: 0.5rem;
   }
 
-  .goal .happens {
+  .win .happens, .goal .happens {
     font-size: 0.5rem;
   }
 
@@ -697,7 +700,6 @@ h2:hover, .goal .goal-actions button:hover {
     padding: 7px 10px;
     margin: 4px 0;
   }
-
 }
 
 /* Scrollbar Styles */
@@ -731,3 +733,4 @@ h2:hover, .goal .goal-actions button:hover {
 }
 
 /* End of Scrollbar Styles */
+
