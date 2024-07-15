@@ -7,6 +7,24 @@
 
   Welcome to **Clover Planner** - The personal journal / planner pal of mine!
 
+   <table align="center"; margin: auto;">
+    <tr>
+      <td align="center">
+        <strong>Github Pages:</strong><br>
+        <a href="https://valerio-sirlance.github.io/clover-planner/">
+          <img src="https://img.shields.io/badge/Github%20Pages-Visit%20Here-navy" alt="Github Pages">
+        </a>
+      </td>
+      <td align="center">
+        <strong>Netlify:</strong><br>
+        <a href="https://clover-planner.netlify.app/">
+          <img src="https://img.shields.io/badge/Netlify-Visit%20Here-blue" alt="Netlify">
+        </a>
+      </td>
+    </tr>
+  </table>
+
+
   ## Features 📖
   
   **Secure Login**: Ensures the protection of my personal journal.
@@ -26,7 +44,6 @@
 
   The development of this project is made possible through:
 
-  
   [![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) 
   [![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS) 
   [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) 
