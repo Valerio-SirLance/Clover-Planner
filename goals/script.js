@@ -6,14 +6,14 @@ import { getDatabase, ref, push, set, get, update, remove } from
 
 // Firebase project configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCeJlqfAu___gl2PxqVg9VNgjErlCmIxxQ",
-    authDomain: "clover-planner.firebaseapp.com",
-    databaseURL: "https://clover-planner-default-rtdb.firebaseio.com",
-    projectId: "clover-planner",
-    storageBucket: "clover-planner.appspot.com",
-    messagingSenderId: "936646667254",
-    appId: "1:936646667254:web:afd6229dd483c07140b5d7"
-  };
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
   
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
