@@ -1,23 +1,38 @@
-import { initializeApp } from
-    'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-import { getDatabase, ref, push, set, get, update, remove } from
-    'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
+import { getDatabase, ref, push, set, get, update, remove } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-
-// Firebase project configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
-  
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+
+// Check authentication status
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "../index.html";
+  }
+});
+
+// Function to log out
+export function logout() {
+    signOut(auth).then(() => {
+        sessionStorage.removeItem('isLoggedIn');
+        window.location.href = "../index.html";
+    }).catch((error) => {
+        console.error("Error signing out: ", error);
+    });
+}
 
 // Function to open modal 
 export function openTaskModal() {
@@ -148,9 +163,7 @@ function displayTasks() {
           console.error(`Task list with ID '${status}' not found.`);
         }
       });
-    } else {
-      console.log('No tasks found.');
-    }
+    } 
   }).catch(error => {
     console.error('Error fetching tasks:', error);
   });
@@ -169,7 +182,6 @@ export function openTaskFullModal(title, description) {
   setTimeout(() => {
       modal.querySelector('.modal-content').classList.add('show');
   }, 50);
-  console.log("opening task " + title);
 }
 
 // Function to close modal 
@@ -186,7 +198,6 @@ export function moveTask(taskKey, newStatus) {
   const taskRef = ref(database, `tasks/${taskKey}`);
   update(taskRef, { status: newStatus })
     .then(() => {
-      console.log('Task status updated successfully!');
       location.reload(); 
     })
     .catch((error) => {
@@ -263,13 +274,6 @@ export function deleteTask(taskKey) {
 window.onload = function() {
   displayTasks();
 };
-
-// Log out function
-export function logout() {
-    // Clear session token
-    sessionStorage.removeItem('isLoggedIn');
-    window.location.href = "../index.html";
-}
 
 // Session Token, Light / Dark Modes, Mobile Navigation Menu
 document.addEventListener('DOMContentLoaded', function() {

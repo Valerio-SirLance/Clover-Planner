@@ -1,7 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-import { getDatabase, ref, push, set, get, update, remove } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-// Firebase project configuration
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -14,13 +13,23 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
+const auth = getAuth(app);
 
-// Log out function
-export function logout() {
-    // Clear session token
-    sessionStorage.removeItem('isLoggedIn');
+// Check authentication status
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
     window.location.href = "../index.html";
+  }
+});
+
+// Function to log out
+export function logout() {
+    signOut(auth).then(() => {
+        sessionStorage.removeItem('isLoggedIn');
+        window.location.href = "../index.html";
+    }).catch((error) => {
+        console.error("Error signing out: ", error);
+    });
 }
 
 // Session Token, Light / Dark Modes, Mobile Navigation Menu

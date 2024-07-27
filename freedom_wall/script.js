@@ -1,10 +1,7 @@
-import { initializeApp } from
-    'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
-import { getDatabase, ref, push, set, get, update, remove } from
-    'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
+import { getDatabase, ref, push, set, get, update, remove } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
-
-// Firebase project configuration
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -14,10 +11,28 @@ const firebaseConfig = {
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
     appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
-  
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
+
+// Check authentication status
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "../index.html";
+  }
+});
+
+// Function to log out
+export function logout() {
+    signOut(auth).then(() => {
+        sessionStorage.removeItem('isLoggedIn');
+        window.location.href = "../index.html";
+    }).catch((error) => {
+        console.error("Error signing out: ", error);
+    });
+}
 
 // Function to open modal 
 export function openNoteModal() {
@@ -122,7 +137,6 @@ export function openNoteFullModal(title, content) {
     setTimeout(() => {
         modal.querySelector('.modal-content').classList.add('show');
     }, 50);
-    console.log("opening note " + title);
 }
 
 // Function to close modal 
@@ -200,13 +214,6 @@ export function deleteNote(noteKey) {
 window.onload = function() {
     displayNotes();
   };
-  
-// Log out function
-export function logout() {
-    // Clear session token
-    sessionStorage.removeItem('isLoggedIn');
-    window.location.href = "../index.html";
-}
 
 // Session Token, Light / Dark Modes, Mobile Navigation Menu
 document.addEventListener('DOMContentLoaded', function() {

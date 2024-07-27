@@ -1,7 +1,8 @@
-// Firebase project configuration
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-app.js';
 import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-database.js';
+import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.5.0/firebase-auth.js';
 
+// Initialize Firebase
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -12,11 +13,42 @@ const firebaseConfig = {
     appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-// Function for password's eye
+// Function to hash a password 
+async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+}
+
+export async function checkPassword() {
+    try {
+        await signInAnonymously(auth);
+        const passwordInput = document.getElementById('passwordInput').value;
+        const hashedPasswordInput = await hashPassword(passwordInput);
+        
+        const passwordRef = ref(database, 'password');
+        const snapshot = await get(passwordRef);
+        const storedPassword = snapshot.val(); 
+
+        if (hashedPasswordInput === storedPassword) {
+            sessionStorage.setItem('isLoggedIn', true);
+            showModal("Welcome, Sir Lance!");
+        } else {
+            showModal("Password Incorrect, Try Again!");
+        }
+    } catch (error) {
+        console.error("Error retrieving password:", error);
+        showModal("Error retrieving password. Please try again later.");
+    }
+}
+
 export function togglePasswordVisibility() {
     const passwordInput = document.getElementById('passwordInput');
     const eyeIcon = document.getElementById('eyeIcon');
@@ -32,36 +64,11 @@ export function togglePasswordVisibility() {
     }
 }
 
-// Function to handle form submission
 document.getElementById('loginForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    import('./script.js').then(module => module.checkPassword());
+    checkPassword();
 });
 
-// Function to check password
-export async function checkPassword() {
-    const passwordInput = document.getElementById('passwordInput').value;
-    const passwordRef = ref(database, 'password'); 
-
-    try {
-        const snapshot = await get(passwordRef);
-        const correctPassword = snapshot.val();
-
-        if (passwordInput === correctPassword) {
-            // Set session token upon successful login
-            sessionStorage.setItem('isLoggedIn', true);
-            showModal("Welcome, Sir Lance!");
-        } else {
-            showModal("Password Incorrect, Try Again!");
-        }
-    } catch (error) {
-        console.error("Error retrieving password:", error);
-        showModal("Error retrieving password. Please try again later.");
-    }
-}
-
-/* JS of Modals */
-// Function to show modal
 function showModal(message) {
     const modal = document.getElementById('passwordModal');
     const modalOverlay = document.querySelector('.modal-overlay');
@@ -81,7 +88,6 @@ function showModal(message) {
     }
 }
 
-// Function to close modal
 function closeModal() {
     const modal = document.getElementById('passwordModal');
     const modalOverlay = document.querySelector('.modal-overlay');
@@ -91,8 +97,5 @@ function closeModal() {
     document.body.classList.remove('modal-open');
 }
 
-// Attach event listener to modal close button
 const modalCloseBtn = document.getElementById('modalCloseBtn');
 modalCloseBtn.addEventListener('click', closeModal);
-
-/* End of JS of Modals */
