@@ -7,22 +7,9 @@
 
   Welcome to **Clover Planner** - The personal journal / planner pal of mine!
 
-   <table align="center"; margin: auto;">
-    <tr>
-      <td align="center">
-        <strong>Github Pages:</strong><br>
-        <a href="https://valerio-sirlance.github.io/clover-planner/">
-          <img src="https://img.shields.io/badge/Github%20Pages-Visit%20Here-navy" alt="Github Pages">
-        </a>
-      </td>
-      <td align="center">
-        <strong>Netlify:</strong><br>
-        <a href="https://clover-planner.netlify.app/">
-          <img src="https://img.shields.io/badge/Netlify-Visit%20Here-blue" alt="Netlify">
-        </a>
-      </td>
-    </tr>
-  </table>
+  <a href="https://clover-planner.netlify.app/">
+      <img src="https://img.shields.io/badge/Netlify-Visit%20Here-darkgreen" alt="Netlify" style="width: 150px; height: auto;">
+  </a>
 
 
   ## Features 📖
